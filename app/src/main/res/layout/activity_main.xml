@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".MainActivity">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp30">
+
+                <ImageView
+                    android:id="@+id/main_setting"
+                    android:layout_width="@dimen/dp25"
+                    android:layout_height="@dimen/dp25"
+                    android:layout_marginLeft="@dimen/dp14"
+                    android:src="@mipmap/icon_setting"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name_main"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/mainRefresh"
+                    android:layout_width="@dimen/dp25"
+                    android:layout_height="@dimen/dp25"
+                    android:layout_marginRight="@dimen/dp14"
+                    android:visibility="gone"
+                    android:src="@mipmap/icon_refresh"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <include
+                android:id="@+id/main"
+                layout="@layout/layout_main" />
+
+            <include
+                android:id="@+id/main_searching"
+                layout="@layout/layout_main_searching" />
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="77dp"
+            android:layout_marginTop="94dp"
+            android:layout_marginBottom="@dimen/dp40">
+
+            <TextView
+                android:id="@+id/main_wifi_detect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:drawableTop="@mipmap/icon_wifi"
+                android:drawablePadding="3dp"
+                android:text="Wi-Fi Detect"
+                android:textColor="@color/color_666666"
+                android:textSize="10sp"
+
+                />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/deviceScanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawableTop="@mipmap/icon_guide"
+                android:drawablePadding="3dp"
+                android:text="Scanner"
+                android:textColor="@color/color_666666"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/main_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableTop="@mipmap/icon_guide"
+                android:drawablePadding="3dp"
+                android:text="防偷拍攻略"
+                android:textColor="@color/color_666666"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</layout>

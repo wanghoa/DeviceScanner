@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">DeviceDetector</string>
+    <string name="app_name_main">Wi-Fi Device Sanner</string>
+    <string name="device_info">Device Info</string>
+    <string name="suspicious_device">Suspicious Devices</string>
+    <string name="main_scan_wifi">Scan Network</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="copy">COPY MAC-ADDRESS</string>
+    <string name="main_searching_founded">Founded</string>
+    <string name="main_searching_area">Scanning 11 from 235 IP range</string>
+    <string name="main_searching_finish">Scanning Finished</string>
+    <string name="main_searching_finish_describe">Now you can manager devices,check their ping and more</string>
+    <string name="main_searching_finish_describetwo">You can view and monitor suspicious devices on your network</string>
+    <string name="main_searching_closed">Do not close the application during the entire scanning process, otherwise it will interrupt the process</string>
+    <string name="subscribe_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
+    <string name="safety_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
+    <string name="safety_strategy">防偷拍攻略</string>
+    <string name="safety_be_secretly">投宿如何防止被偷拍</string>
+    <string name="safety_be_can_appear">偷拍摄像头可能出现的地方</string>
+    <string name="safety_strategy_action">防偷拍动作</string>
+    <string name="safety_strategy_importantplace">重点关注位置！</string>
+    <string name="safety_strategy_place">防偷拍重要防范地点</string>
+    <string name="safety_strategy_out">出行时如何防偷拍</string>
+    <string name="safety_strategy_house">住所安全</string>
+    <string name="safety_strategy_live">居住时如何防偷拍</string>
+    <string name="safety_strategy_help">如遇到被偷拍情况，及时报警，并向周围人求助。</string>
+    <string name="safety_strategy_hostel">出租的房屋、旅店，甚至一些高档的旅店。</string>
+    <string name="safety_strategy_notice">1.使用出租的房屋注意检查各处的电源插座孔、浴镜，尤其是与单向玻璃结合使用）、烟雾感应器、灯座、天花板、钥匙孔等处，同时要特别留意房间周围是否有可疑电线，这些可能就是针孔摄像机的电源与信号线。</string>
+    <string name="safety_strategy_out_import_des">从视觉上断绝偷拍可能的最有效途径。以安全裤为例，穿裙子时若穿了安全裤，能更有效保护个人隐私，防止隐私曝光。</string>
+    <string name="safety_strategy_skirt_des">1.远离任何往你裙下移动的不明物体，无论是拐杖、还是鞋子、或者遥控玩具之类的。目前很多针孔摄像头已经做到非常小了，而且一些职业偷拍经常能弄出一些匪夷所思的装备。</string>
+    <string name="safety_strategy_shoes_des">2.远离你身边系鞋带的人。</string>
+    <string name="safety_strategy_rental_housing">2.使用出租屋附带的家具要特别检查空调孔、电话(可能遭监听)与衣橱上方等。</string>
+    <string name="safety_strategy_des">3.远离靠近你的拐杖，或低于女孩裙子的黑色塑料袋、包包之类的。</string>
+    <string name="safety_strategy_qiquan">3.到酒店、宾馆、招待所住宿时，由于酒店等设备齐全，可以安装"针孔摄影机"的地方很多，包括空调、灯罩、天花板、化妆镜、烟雾感应器、花瓶、插座、电视架，尤其重点注意面对床的设备与摆设。</string>
+    <string name="safety_strategy_shopping_des">4.在商场更衣室、公共厕所等地方，一定要先检查有无遗落的手机，摄像头。</string>
+    <string name="safety_strategy_traffic">1.公交地铁</string>
+    <string name="safety_strategy_elevator_stairs">2.楼梯电梯</string>
+    <string name="safety_strategy_street_bridge">3.过街天桥</string>
+    <string name="safety_strategy_fitting_washroom">4.试衣间卫生间</string>
+    <string name="safety_strategy_traffic_des">如果你坐在座位上，最好将手或者书本、包包等物品放在腿上并双腿并拢，同时双腿正放；如果你是站立的，最好选择女士集中的区域，并提高警惕。</string>
+    <string name="safety_strategy_elevator_des">上楼梯时尽量走靠墙的一侧并一手拉紧自己的短裤，同时注意步伐不要太大；而乘坐电梯时最好侧身站立或收拢双腿，侧身站立也往往让那些偷拍者无力回天，注意楼梯下或身后的可疑人员。</string>
+    <string name="safety_strategy_bridge_des">过街天桥时，一般靠两边走容易被偷拍到，而走在中间则可以大大降低风险。</string>
+    <string name="safety_strategy_washroom_des">在更衣、如厕时要注意周围有无偷拍设备，特别注意头顶和脚下的空隙，使用公共厕所时特别注意垃圾桶；其次也应该注意抽水马桶内或下方有无可疑物品，变态之徒有可能将"无线针孔"暗藏其内进行偷拍；在温泉游泳池，更衣室是否有可疑物品，同时也要注意同性的偷拍，消暑娱乐时要警惕是否有人提着篮子或者拿着包包靠近。</string>
+    <string name="safety_strategy_notice_des">使用出租的房屋注意检查各处的电源插座孔、浴镜，尤其是与单向玻璃结合使用）、烟雾感应器、灯座、天花板、钥匙孔等处，同时要特别留意房间周围是否有可疑电线，这些可能就是针孔摄像机的电源与信号线。。</string>
+    <string name="safety_strategy_palce_des">酒店，宾馆，民宿安装的都是固定位置安装的偷拍装备。通常是借助有线线路持续不断供电和传输信号，搭载大功率高清晰度摄像头组和红外线，有线摄像头也可进行无线Wi-Fi信号传输录像，可实现本地存储。</string>
+    <string name="safety_strategy_more">还有很多比如纸巾盒，音响，挂钩，钟表等等都是这些偷拍摄像头的"隐身"之处。</string>
+
+
+</resources>

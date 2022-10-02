@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:minHeight="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/color_071d1d">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/tabImage"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
+                android:layout_marginStart="@dimen/dp10"
+                android:src="@mipmap/icon_guide" />
+
+            <TextView
+                android:id="@+id/tabIpText"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:text="192.168.1.1" />
+
+
+            <TextView
+                android:id="@+id/tabEquipmentText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:text="Router" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
