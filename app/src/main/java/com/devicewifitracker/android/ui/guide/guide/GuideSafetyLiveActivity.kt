@@ -12,9 +12,9 @@ import com.devicewifitracker.android.ui.player.VideoPlayerActivity
 
 class GuideSafetyLiveActivity :BaseActivity<ActivityGuideSafetyLiveBinding>() {
     companion object{
-        fun actionOpenAct(context: Context) {
+        fun actionOpenAct(context: Context?) {
             val intent = Intent(context,GuideSafetyLiveActivity::class.java)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
     override fun getLayoutId(): Int = R.layout.activity_guide_safety_live

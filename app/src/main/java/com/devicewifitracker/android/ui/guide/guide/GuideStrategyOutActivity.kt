@@ -11,9 +11,9 @@ import com.devicewifitracker.android.databinding.ActivityGuideSafetyOutBinding
 
 class GuideStrategyOutActivity:BaseActivity<ActivityGuideSafetyOutBinding>() {
     companion object{
-        fun actionOpenAct(context: Context) {
+        fun actionOpenAct(context: Context?) {
             val intent = Intent(context,GuideStrategyOutActivity::class.java)
-            context.startActivity(intent)
+            context?.startActivity(intent)
 
         }
     }

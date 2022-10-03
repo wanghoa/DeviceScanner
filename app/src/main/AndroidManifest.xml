@@ -26,24 +26,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DeviceWifiTracker"
         tools:targetApi="31">
+
         <activity
-            android:name=".BottomNavigationActivity"
-            android:exported="true"
-            android:label="@string/title_activity_bottom_navigation">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:name=".ui.WelcomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".ui.WelcomeActivity"
-            android:exported="true">
+            android:name=".BottomNavigationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_navigation">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
 
         </activity>
+
         <activity
             android:name=".ui.suspicious.SuspiciousDevicActivity"
             android:exported="false" />

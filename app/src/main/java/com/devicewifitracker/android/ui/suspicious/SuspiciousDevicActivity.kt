@@ -22,7 +22,7 @@ class SuspiciousDevicActivity :BaseActivity<ActivitySuspiciousBinding>() {
     var adapter : SuspiciousAdapter ?= null
     companion object{
         const val  ACT_NAME = "act_name"
-        fun actionOpenAct(context: Context, list:java.util.ArrayList<String>) {
+        fun actionOpenAct(context: Context?, list:java.util.ArrayList<String>) {
             val  intent = Intent(context, SuspiciousDevicActivity::class.java).apply {
                 val bundle = Bundle()
                 bundle. putSerializable("list",list as java.io.Serializable)
@@ -30,7 +30,7 @@ class SuspiciousDevicActivity :BaseActivity<ActivitySuspiciousBinding>() {
 //            putParcelableArrayListExtra()
 
             }
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
 //    var launcher : ActivityResultLauncher<>?= null

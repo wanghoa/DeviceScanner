@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 
 import com.devicewifitrack.android.ui.guide.GuideCallback
+import com.devicewifitracker.android.BottomNavigationActivity
 import com.devicewifitracker.android.MainActivity
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
@@ -52,7 +53,8 @@ class GuideActivity : BaseActivity<ActivityGuideBinding>() {
         override fun callback(index: Int) {
             var currentIndex = binding.viewPager.currentItem
             if(index == 2){
-                startActivity(Intent(this@GuideActivity, MainActivity::class.java))
+//                startActivity(Intent(this@GuideActivity, MainActivity::class.java))
+                startActivity(Intent(this@GuideActivity, BottomNavigationActivity::class.java))
                 finish()
             }else{
                 binding.viewPager.setCurrentItem(index+1,true)

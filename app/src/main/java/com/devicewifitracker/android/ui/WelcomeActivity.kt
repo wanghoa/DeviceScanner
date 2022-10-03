@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.devicewifitracker.android.BottomNavigationActivity
 import com.devicewifitracker.android.MainActivity
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
@@ -51,7 +52,8 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
                     ToastUtils.showShort("You have denied relevant permissions")
                 }
                 if(SPUtils.getInstance().getBoolean(Constant.GUIDE_KEY)){
-                    startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+//                    startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+                    startActivity(Intent(this@WelcomeActivity, BottomNavigationActivity::class.java))
                 }else{
                     startActivity(Intent(this@WelcomeActivity, GuideActivity::class.java))
                 }

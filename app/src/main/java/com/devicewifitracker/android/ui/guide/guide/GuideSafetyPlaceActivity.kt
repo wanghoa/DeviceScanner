@@ -11,9 +11,9 @@ import com.devicewifitracker.android.databinding.ActivityGuideSafetyPlaceBinding
 
 class GuideSafetyPlaceActivity : BaseActivity<ActivityGuideSafetyPlaceBinding>() {
     companion object{
-        fun actionOpenAct(context: Context) {
+        fun actionOpenAct(context: Context?) {
             val intent = Intent(context,GuideSafetyPlaceActivity::class.java)
-            context.startActivity(intent)
+            context?.startActivity(intent)
         }
     }
     override fun getLayoutId(): Int = R.layout.activity_guide_safety_place
