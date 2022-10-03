@@ -16,9 +16,9 @@ import com.devicewifitracker.android.util.SubscribeManager
 
 class SettingActivity : BaseActivity<ActivitySettingBinding>(){
     companion object{
-        fun actionOpenAct(context: Context) {
+        fun actionOpenAct(context: Context?) {
             val intent = Intent(context,SettingActivity::class.java)
-            context.startActivity(intent)
+            context?.startActivity(intent)
 
         }
     }
