@@ -2,26 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.devicewifitracker.android">
-    <!--使用网络-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--wifi状态权限-->
+    <!-- 使用网络 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- wifi状态权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!--位置信息-->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!--如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <!--android 10.0使用wifi api新添加的权限-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 如果是安卓10.0，需要后台获取连接的wifi名称则添加进程获取位置信息权限 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- android 10.0使用wifi api新添加的权限 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="com.android.vending.BILLING" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -34,30 +27,66 @@
         android:theme="@style/Theme.DeviceWifiTracker"
         tools:targetApi="31">
         <activity
-            android:name=".ui.WelcomeActivity"
-            android:exported="true">
+            android:name=".BottomNavigationActivity"
+            android:exported="true"
+            android:label="@string/title_activity_bottom_navigation">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.WelcomeActivity"
+            android:exported="true">
 
-        <activity android:name=".ui.suspicious.SuspiciousDevicActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.guide.GuideActivity"/>
-        <activity android:name=".ui.subscribe.SubscribeActivity"/>
-        <activity android:name=".DeviceScannerActivity"/>
-        <activity android:name=".ui.guide.guide.GuideStrategyActivity"/>
-        <activity android:name=".ui.guide.guide.GuideSafetyLiveActivity"/>
-        <activity android:name=".ui.guide.guide.GuideSafetyPlaceActivity"/>
-        <activity android:name=".ui.guide.guide.GuideStrategyOutActivity"/>
-        <activity android:name=".ui.setting.SettingActivity"/>
-        <activity android:name=".ui.player.VideoPlayerActivity"/>
-        <activity android:name=".ui.setting.PrivacyPolicyActivity"/>
-        <activity android:name=".ui.setting.TermsOfUseActivity"/>
-        <activity android:name=".ui.setting.FeedbackActivity"/>
-        <activity android:name=".ui.detail.SuspiciousDetailActivity"/>
+        </activity>
+        <activity
+            android:name=".ui.suspicious.SuspiciousDevicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.guide.GuideActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.subscribe.SubscribeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeviceScannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.guide.guide.GuideStrategyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.guide.guide.GuideSafetyLiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.guide.guide.GuideSafetyPlaceActivity"
+            android:exported="false" />
+        <activity android:name=".ui.guide.guide.GuideStrategyOutActivity" />
+        <activity
+            android:name=".ui.setting.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.player.VideoPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.TermsOfUseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.setting.FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detail.SuspiciousDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
