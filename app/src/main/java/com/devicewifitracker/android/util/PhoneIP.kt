@@ -1,6 +1,6 @@
 package com.devicewifitracker.android.util
 
-import androidx.core.content.PackageManagerCompat.LOG_TAG
+//import androidx.core.content.PackageManagerCompat.LOG_TAG
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
