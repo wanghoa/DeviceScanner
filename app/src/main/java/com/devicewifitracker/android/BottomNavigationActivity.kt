@@ -35,19 +35,7 @@ class BottomNavigationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
-
-//        val navController = findNavController(R.id.nav_host_fragment_activity_bottom_navigation)
-        val navController =
-            Navigation.findNavController(this, R.id.nav_host_fragment_activity_bottom_navigation)
-
-        val navHostFragment =
-//            getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_bottom_navigation) as NavHostFragment
-//        val  navigator =  KeepStateNavigation(this, navHostFragment.getChildFragmentManager(), R.id.nav_host_fragment_activity_bottom_navigation);
-//        val  navigator =  CustomNavigator(this, supportFragmentManager, R.id.nav_host_fragment_activity_bottom_navigation);
-//        navController.getNavigatorProvider().addNavigator(navigator);
-//        navController.setGraph(R.navigation.mobile_navigation);
-
+        val navController = findNavController(R.id.nav_host_fragment_activity_bottom_navigation)
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
