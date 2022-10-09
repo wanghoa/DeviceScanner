@@ -45,8 +45,8 @@
     <string name="safety_strategy_palce_des">酒店，宾馆，民宿安装的都是固定位置安装的偷拍装备。通常是借助有线线路持续不断供电和传输信号，搭载大功率高清晰度摄像头组和红外线，有线摄像头也可进行无线Wi-Fi信号传输录像，可实现本地存储。</string>
     <string name="safety_strategy_more">还有很多比如纸巾盒，音响，挂钩，钟表等等都是这些偷拍摄像头的"隐身"之处。</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_home">Wi-Fi扫描</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">智能探测</string>
+    <string name="title_dashboard">红外探测</string>
     <string name="title_notifications">防偷拍攻略</string>
 
 
