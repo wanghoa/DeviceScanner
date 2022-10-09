@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@mipmap/icon_wifi"
+        android:icon="@mipmap/icon_navigation_smart"
         android:title="@string/title_home" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_dashboard"-->
-<!--        android:icon="@drawable/ic_dashboard_black_24dp"-->
-<!--        android:title="@string/title_dashboard" />-->
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@mipmap/icon_vavigation_hw"
+        android:title="@string/title_dashboard" />
 
     <item
         android:id="@+id/navigation_notifications"
