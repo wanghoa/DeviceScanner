@@ -90,6 +90,9 @@
         <activity
             android:name=".ui.detail.SuspiciousDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.gpu.GpuActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
