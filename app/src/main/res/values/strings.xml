@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">DeviceDetector</string>
     <string name="app_name_main">Wi-Fi Device Sanner</string>
+    <string name="app_wifi_check">Wi-Fi 设备检测仪</string>
+    <string name="app_camera_check">摄像头红点检测</string>
     <string name="device_info">Device Info</string>
     <string name="suspicious_device">Suspicious Devices</string>
     <string name="main_scan_wifi">Scan Network</string>
+    <string name="main_scan_network">扫描网络</string>
     <string name="subscribe">Subscribe</string>
     <string name="copy">COPY MAC-ADDRESS</string>
     <string name="main_searching_founded">Founded</string>
