@@ -28,6 +28,10 @@ import com.devicewifitracker.android.util.NetworkInfoUtil
 import com.devicewifitracker.android.util.PermissionUtil
 import java.util.logging.Logger
 
+/**
+ * 当前类未使用
+ */
+
 class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
     GuideStrategyActivity.CallBack {
     var tableList: ArrayList<String>? = null

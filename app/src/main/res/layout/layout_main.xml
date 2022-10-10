@@ -94,17 +94,19 @@
             android:background="@drawable/bg_wifi_scan_network">
 
             <TextView
+                android:id="@+id/scan_network"
                 style="@style/guide_blue_button_text_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_scan_wifi" />
+                android:text="@string/main_scan_network" />
 
             <ImageView
-                android:layout_width="@dimen/dp18"
-                android:layout_height="@dimen/dp18"
-                android:layout_alignParentRight="true"
+                android:layout_toLeftOf="@+id/scan_network"
+                android:src="@mipmap/icon_wifi_defalt"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp16"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp20" />
+                android:layout_marginRight="@dimen/dp9" />
         </RelativeLayout>
 
 
