@@ -18,12 +18,14 @@ import com.blankj.utilcode.util.LogUtils
 import com.devicewifitracker.android.databinding.ActivityBottomNavigationBinding
 import com.devicewifitracker.android.navigation.CustomNavigator
 import com.devicewifitracker.android.navigation.KeepStateNavigation
+import com.devicewifitracker.android.ui.dashboard.DashboardFragment
 import com.devicewifitracker.android.ui.home.HomeFragment
 import com.devicewifitracker.android.ui.notifications.NotificationsFragment
 
 class BottomNavigationActivity : AppCompatActivity() {
     var fragmentManager: FragmentManager? = null
     var fragmentTransaction: FragmentTransaction? = null
+    var dashboard: DashboardFragment? = null
     private lateinit var binding: ActivityBottomNavigationBinding
     var home: HomeFragment? = null
     var notification: NotificationsFragment? = null
@@ -81,6 +83,13 @@ class BottomNavigationActivity : AppCompatActivity() {
                     }
                     switchContent(currentFragment, notification);
                     return true;
+                }
+                R.id.navigation_dashboard ->{
+                    if(dashboard == null){
+                       dashboard = DashboardFragment()
+                    }
+                    switchContent(currentFragment,dashboard)
+                    return true
                 }
               else  ->
                 return false
