@@ -1,9 +1,14 @@
 package com.devicewifitracker.android.ui.dashboard.adapter
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.devicewifitracker.android.App
