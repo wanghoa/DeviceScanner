@@ -10,106 +10,132 @@
     <!--    <merge-->
     <!--        android:layout_width="match_parent"-->
     <!--        android:layout_height="match_parent">-->
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/main_ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+        <LinearLayout
 
-        <TextView
-            android:id="@+id/tv_wifi_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            tools:text="WI-FI: YINLINGUOJI" />
-
-        <TextView
-            android:id="@+id/tv_ip_adress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp12"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            tools:text="ip:192.168.0.123" />
-
-
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_iv"
-            android:layout_width="@dimen/dp254"
-            android:layout_height="@dimen/dp254"
-            android:layout_marginTop="@dimen/dp70"
-            android:src="@drawable/gif_wifi" />
-        <RelativeLayout
-            android:id="@+id/nextll"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp42"
-            android:layout_marginHorizontal="@dimen/dp14"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_main_searching_inner"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="@dimen/dp16"
-                android:layout_height="@dimen/dp16"
-                android:layout_marginLeft="@dimen/dp17"
-                android:src="@mipmap/icon_gth" />
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/main_wifi_detect"
+                android:id="@+id/tv_wifi_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/image"
-                android:text="Suspicious Device"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="@dimen/dp8"
+                android:layout_marginTop="34dp"
+                android:textColor="@color/white"
                 android:textSize="14sp"
-
-                />
-
-            <ImageView
-                android:paddingRight="@dimen/dp12"
-                android:id="@+id/next"
-                android:layout_alignParentRight="true"
-                android:layout_width="@dimen/dp19"
-                android:layout_height="@dimen/dp19"
-                android:layout_marginLeft="@dimen/dp17" />
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/btn_scan"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp54"
-            android:layout_marginHorizontal="@dimen/dp50"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp98"
-            android:layout_marginRight="@dimen/dp20"
-            android:layout_marginBottom="@dimen/dp30"
-            android:background="@drawable/bg_wifi_scan_network">
+                android:textStyle="bold"
+                tools:text="WI-FI: YINLINGUOJI" />
 
             <TextView
-                android:id="@+id/scan_network"
-                style="@style/guide_blue_button_text_style"
+                android:id="@+id/tv_ip_adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/main_scan_network" />
+                android:layout_marginTop="@dimen/dp12"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="ip:192.168.0.123" />
 
-            <ImageView
-                android:layout_toLeftOf="@+id/scan_network"
-                android:src="@mipmap/icon_wifi_defalt"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp16"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp9" />
-        </RelativeLayout>
+            <!--        <pl.droidsonroids.gif.GifImageView-->
+            <!--            android:id="@+id/gif_iv"-->
+            <!--            android:layout_width="@dimen/dp254"-->
+            <!--            android:layout_height="@dimen/dp254"-->
+            <!--            android:layout_marginTop="@dimen/dp70"-->
+            <!--            android:src="@drawable/gif_wifi" />-->
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gif_iv"
+                android:layout_width="@dimen/dp254"
+                android:layout_height="@dimen/dp254"
+                android:layout_marginTop="@dimen/dp60"
+                android:src="@drawable/gif_wifi" />
+
+            <RelativeLayout
+                android:id="@+id/nextll"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp42"
+                android:layout_marginHorizontal="@dimen/dp14"
+                android:layout_marginTop="@dimen/dp12"
+                android:background="@drawable/bg_main_searching_inner"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/dp16"
+                    android:layout_height="@dimen/dp16"
+                    android:layout_marginLeft="@dimen/dp17"
+                    android:src="@mipmap/icon_gth" />
+
+                <TextView
+                    android:id="@+id/main_wifi_detect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp8"
+                    android:layout_toRightOf="@+id/image"
+                    android:text="Suspicious Device"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/next"
+                    android:layout_width="@dimen/dp19"
+                    android:layout_height="@dimen/dp19"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/dp17"
+                    android:paddingRight="@dimen/dp12" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp28"
+                android:lineSpacingExtra="@dimen/dp5"
+                android:layout_marginHorizontal="99dp"
+                android:text="在设备搜索之后，您可以管理和 检查设备的ping，系统稍微 有点时间，所以请耐心等待！"
+                android:textColor="#CCCCCC"
+                android:textSize="@dimen/font_size_13" />
 
 
-    </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/btn_scan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp54"
+                android:layout_marginHorizontal="@dimen/dp50"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginBottom="@dimen/dp80"
+                android:background="@drawable/bg_wifi_scan_network">
+
+                <TextView
+                    android:id="@+id/scan_network"
+                    style="@style/guide_blue_button_text_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_scan_network" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp9"
+                    android:layout_toLeftOf="@+id/scan_network"
+                    android:src="@mipmap/icon_wifi_defalt" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 
 </layout>
