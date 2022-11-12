@@ -15,6 +15,8 @@ import com.devicewifitracker.android.App
 import com.devicewifitracker.android.databinding.AdapterInfraredItemBinding
 import com.devicewifitracker.android.model.Infrared
 import com.devicewifitracker.android.ui.gpu.GpuActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
+import com.devicewifitracker.android.util.SubscribeManager
 
 /**
  * 红外探测
@@ -34,6 +36,10 @@ class InfraredAdapter(private val infraredList: List<Infrared>) :
             AdapterInfraredItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = ViewHolder(tabItemBinding)
         holder.itemView.setOnClickListener {
+            if (!SubscribeManager.instance.isSubscribe()) {
+                parent.context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
+               return@setOnClickListener
+            }
             GpuActivity.actionOpenAct(parent.context)
         }
         return holder

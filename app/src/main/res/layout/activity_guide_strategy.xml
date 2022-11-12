@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
 
                 android:textSize="17sp"
-                android:text="防偷拍攻略"
+                android:text="@string/safety_strategy"
                 android:textColor="@color/white" />
 
             <View

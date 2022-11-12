@@ -6,42 +6,174 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/constraint"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <FrameLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="@dimen/dp28"
-                android:layout_height="@dimen/dp28"
-                android:padding="3dp"
-                android:src="@mipmap/icon_back"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <jp.co.cyberagent.android.gpuimage.GPUImageView
+                android:id="@+id/surfaceView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:gpuimage_show_loading="false"
+                app:gpuimage_surface_type="texture_view" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp38">
+
+                <FrameLayout
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="@dimen/dp28"
+                        android:layout_height="@dimen/dp28"
+                        android:padding="3dp"
+                        android:src="@mipmap/icon_back_hw" />
+
+                </FrameLayout>
 
 
-            <ImageView
-                android:id="@+id/mainRefresh"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginRight="14dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/flashLight"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/icon_light_hw"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
-        <jp.co.cyberagent.android.gpuimage.GPUImageView
-            android:id="@+id/surfaceView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:gpuimage_show_loading="false"
-            app:gpuimage_surface_type="texture_view" />
-        
-    </LinearLayout>
+            android:layout_height="@dimen/dp127"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="@dimen/dp80"
+                android:layout_marginBottom="@dimen/dp70"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/red"
+                        android:layout_width="@dimen/dp26"
+                        android:layout_height="@dimen/dp26"
+                        android:layout_gravity="center"
+
+                        android:src="@mipmap/icon_red_hw" />
+
+                    <ImageView
+                        android:id="@+id/one"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/icon_select_hw" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/green"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/dp26"
+                        android:layout_height="@dimen/dp26"
+                        android:src="@mipmap/icon_green_hw" />
+                    <ImageView
+                        android:id="@+id/two"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/icon_select_hw" />
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/blue"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/dp26"
+                        android:layout_height="@dimen/dp26"
+                        android:src="@mipmap/icon_blue_hw" />
+                    <ImageView
+                        android:id="@+id/three"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/icon_select_hw" />
+                </FrameLayout>
+
+                <ImageView
+
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_weight="1"
+                    android:src="@mipmap/icon_empty_hw"
+                    android:visibility="gone" />
+
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/blackwith"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/dp26"
+                        android:layout_height="@dimen/dp26"
+                        android:src="@mipmap/icon_hb" />
+                    <ImageView
+                        android:id="@+id/four"
+                        android:visibility="invisible"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/icon_select_hw" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/dp26"
+                android:text="Suspicious Camera May Have Infrared Radiation" />
+
+        </FrameLayout>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

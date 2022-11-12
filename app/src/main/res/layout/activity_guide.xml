@@ -6,32 +6,50 @@
     <data>
 
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<!--    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".ui.guide.GuideActivity">
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="@dimen/dp52"
-            android:layout_marginTop="@dimen/guide_indicator_margin_top"
-            app:tabGravity="fill"
-            android:background="@color/transparent"
-            app:tabBackground="@drawable/tab_indicator_bg"
-            app:tabIndicatorColor="@color/transparent"
-            app:tabIndicator="@drawable/tab_indicator"
-            app:tabIndicatorHeight="@dimen/dp5"
-            app:tabIndicatorFullWidth="true"
+        >
 
-            android:layout_width="90dp"
-            android:layout_height="@dimen/guide_indicator_height"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.stx.xhb.xbanner.XBanner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:isAutoPlay="false"
+            app:pointsVisibility="false"
+            />
+
+    </RelativeLayout>-->
+       <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:fitsSystemWindows="true"
+       tools:context=".ui.guide.GuideActivity">
+       <androidx.viewpager2.widget.ViewPager2
+           android:id="@+id/view_pager"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"/>
+       <com.google.android.material.tabs.TabLayout
+           android:id="@+id/tab_layout"
+           android:visibility="gone"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintLeft_toLeftOf="parent"
+           android:layout_marginLeft="@dimen/dp52"
+           android:layout_marginTop="@dimen/guide_indicator_margin_top"
+           app:tabGravity="fill"
+           android:background="@color/transparent"
+           app:tabBackground="@drawable/tab_indicator_bg"
+           app:tabIndicatorColor="@color/transparent"
+           app:tabIndicator="@drawable/tab_indicator"
+           app:tabIndicatorHeight="@dimen/dp5"
+           app:tabIndicatorFullWidth="true"
+
+           android:layout_width="90dp"
+           android:layout_height="@dimen/guide_indicator_height"/>
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
+
+

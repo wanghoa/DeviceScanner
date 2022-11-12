@@ -33,7 +33,7 @@
                 android:id="@+id/tv_app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="隐私政策"
+                android:text="@string/privacy_policy"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"

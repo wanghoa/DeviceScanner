@@ -112,7 +112,7 @@
                 android:layout_alignParentRight="true"
                 android:drawableTop="@mipmap/icon_guide"
                 android:drawablePadding="3dp"
-                android:text="防偷拍攻略"
+                android:text="@string/safety_strategy"
                 android:textColor="@color/color_666666"
                 android:textSize="10sp" />
 

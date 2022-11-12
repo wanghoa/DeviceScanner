@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="font_size_10">10sp</dimen>
     <dimen name="font_size_12">12sp</dimen>
     <dimen name="font_size_13">13sp</dimen>
     <dimen name="font_size_15">15sp</dimen>
@@ -56,6 +57,10 @@
     <dimen name="dp98">98dp</dimen>
     <dimen name="dp100">100dp</dimen>
     <dimen name="dp127">127dp</dimen>
+    <dimen name="dp160">160dp</dimen>
+    <dimen name="dp180">180dp</dimen>
+    <dimen name="dp210">210dp</dimen>
+    <dimen name="dp312">312dp</dimen>
     <dimen name="dp254">254dp</dimen>
     <dimen name="guide_indicator_margin_top">150dp</dimen>
     <dimen name="guide_indicator_height">5dp</dimen>

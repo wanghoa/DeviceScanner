@@ -18,7 +18,7 @@ object PermissionUtil {
         permissions: Array<String?>
     ): Observable<Boolean?>? {
         val rxPermissions = RxPermissions(fragmentActivity!!)
-        return rxPermissions.request(*permissions)
+        return rxPermissions.request(*permissions)// 这里会偶先一个异常java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
     }
     fun isGranted(fragmentActivity: FragmentActivity?, permission: String?): Boolean? {
         val rxPermissions = RxPermissions(fragmentActivity!!)

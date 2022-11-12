@@ -5,198 +5,234 @@
 
     <data></data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_view"
+    <androidx.core.widget.NestedScrollView
+        android:background="@color/black"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="@dimen/dp25"
-            android:layout_height="@dimen/dp25"
-            android:layout_marginLeft="@dimen/dp9"
-            android:src="@mipmap/icon_back"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Device Info"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <FrameLayout
-            android:id="@+id/frame_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp60"
-            app:layout_constraintTop_toBottomOf="@+id/title_tv">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="183dp"
-                android:layout_marginHorizontal="@dimen/dp20"
-                android:layout_marginTop="@dimen/dp32"
-                android:background="@drawable/bg_device_info"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/wifiNameTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp54"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    tools:text="Wi-Fi 13567" />
-
-                <TextView
-                    android:id="@+id/tvIP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp12"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    tools:text="IP Address : 192.168.0.1" />
-
-                <TextView
-                    android:id="@+id/tvOrganization"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp12"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    tools:text="Organization：TP-LINK" />
-
-                <RelativeLayout
-                    android:id="@+id/copy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/dp5"
-                    android:layout_marginHorizontal="@dimen/dp80"
-                        android:background="@drawable/bg_detail_radiu_14">
-
-                    <TextView
-                        style="@style/guide_blue_copy_text_style"
-                        android:textSize="@dimen/font_size_12"
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_toRightOf="@+id/copyIv"
-                        android:layout_marginLeft="@dimen/dp5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/copy" />
-
-                    <ImageView
-                        android:id="@+id/copyIv"
-                        android:layout_width="@dimen/dp12"
-                        android:layout_height="@dimen/dp12"
-                        android:layout_marginLeft="@dimen/dp15"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:src="@mipmap/icon_copy" />
-                </RelativeLayout>
-            </LinearLayout>
+            android:layout_height="match_parent"
+           >
 
             <ImageView
-                android:id="@+id/imageWarm"
-                android:layout_width="68dp"
-                android:layout_height="68dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/icon_suspicious_warm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-
-        </FrameLayout>
-
-
-        <TextView
-            android:id="@+id/tv_confirmed_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
-            android:text="Confirmed status"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
-
-        <RelativeLayout
-            android:id="@+id/relative_layout"
-            android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:layout_marginHorizontal="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_device_info"
-            android:gravity="center_vertical"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/tv_confirmed_status">
+                android:id="@+id/back"
+                android:layout_width="@dimen/dp25"
+                android:layout_height="@dimen/dp25"
+                android:layout_marginLeft="@dimen/dp9"
+                android:src="@mipmap/icon_back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvConfirmed"
+                android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="58dp"
-                android:text="Confirmed"
-                android:textColor="#F1ECFF"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tvUnconfirmed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="45dp"
-                android:text="Unconfirmed"
-                android:textColor="#F1ECFF"
-                android:textSize="14sp" />
-
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_ping"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp38"
-            android:text="Device Ping"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relative_layout" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="107dp"
-            android:layout_marginHorizontal="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_device_ping"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/tv_ping">
-
-            <TextView
-                android:id="@+id/tvPing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/dp20"
-                android:text="Check"
+                android:text="@string/device_info"
                 android:textColor="@color/white"
-                android:textSize="32sp" />
-        </FrameLayout>
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp60"
+                app:layout_constraintTop_toBottomOf="@+id/title_tv">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="183dp"
+                    android:layout_marginHorizontal="@dimen/dp20"
+                    android:layout_marginTop="@dimen/dp32"
+                    android:background="@drawable/bg_device_info"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/wifiNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp54"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="Wi-Fi 13567" />
+
+                    <TextView
+                        android:id="@+id/tvIP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        tools:text="IP Address : 192.168.0.1" />
+
+                    <TextView
+                        android:id="@+id/tvOrganization"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:textColor="@color/white"
+                        android:lines="2"
+                        android:layout_marginHorizontal="@dimen/dp50"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/font_size_12"
+                        tools:text="Organization：TP-LINKhhkjhkjhkhkjhkjhkjhkhkjhkjhkjhkjhkjhk" />
+
+                    <RelativeLayout
+                        android:id="@+id/copy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp80"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:background="@drawable/bg_detail_radiu_14"
+                        android:paddingVertical="@dimen/dp5">
+
+                        <TextView
+                            style="@style/guide_blue_copy_text_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:layout_toRightOf="@+id/copyIv"
+                            android:text="@string/copy"
+                            android:textSize="@dimen/font_size_10" />
+
+                        <ImageView
+                            android:id="@+id/copyIv"
+                            android:layout_width="@dimen/dp12"
+                            android:layout_height="@dimen/dp12"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/dp15"
+                            android:src="@mipmap/icon_copy" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageWarm"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/icon_suspicious_warm"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </FrameLayout>
+
+
+            <TextView
+                android:id="@+id/tv_confirmed_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="Confirmed status"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
+
+            <RelativeLayout
+                android:id="@+id/relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="133dp"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp12"
+                android:background="@drawable/bg_device_info"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/tv_confirmed_status">
+                <LinearLayout
+                    android:id="@+id/confirmed"
+                    android:gravity="center"
+                    android:layout_marginLeft="58dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+              <ImageView
+                  android:id="@+id/image_1"
+                  android:src="@mipmap/icon_green_duigou"
+                  android:layout_width="58dp"
+                  android:layout_height="58dp"/>
+
+
+                <TextView
+                    android:id="@+id/tvConfirmed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmed"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:textColor="#F1ECFF"
+                    android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/unconfirmed"
+                    android:gravity="center"
+                    android:layout_marginRight="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <ImageView
+                    android:src="@mipmap/icon_green_duigou"
+                    android:id="@+id/image_2"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"/>
+                <TextView
+                    android:id="@+id/tvUnconfirmed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+
+                    android:text="Unconfirmed"
+                    android:textColor="#F1ECFF"
+                    android:textSize="14sp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_ping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp38"
+                android:text="Device Ping"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relative_layout" />
+
+            <FrameLayout
+                android:id="@+id/checkPing"
+                android:layout_width="match_parent"
+                android:layout_height="107dp"
+                android:layout_marginHorizontal="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp12"
+                android:background="@drawable/bg_device_ping"
+                app:layout_constraintTop_toBottomOf="@+id/tv_ping">
+
+                <TextView
+                    android:id="@+id/pingOrcheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Check"
+                    android:textColor="@color/red_FF101D"
+                    android:textSize="32sp" />
+            </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

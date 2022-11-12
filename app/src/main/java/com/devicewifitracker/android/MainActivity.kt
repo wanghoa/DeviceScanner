@@ -105,7 +105,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
         }
         // 查看可疑设备列表
         binding.mainSearching.nextll.setOnClickListener {
-            SuspiciousDevicActivity.actionOpenAct(this, susList as ArrayList<String>)
+//            SuspiciousDevicActivity.actionOpenAct(this, susList as ArrayList<String>)
         }
 
 

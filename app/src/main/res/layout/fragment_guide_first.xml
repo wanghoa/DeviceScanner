@@ -12,12 +12,36 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".ui.guide.GuideFirstFragment">
-        <ImageView
+      <!--  <ImageView
             android:id="@+id/guideOneIV"
-            android:src="@drawable/guide_one"
-            android:scaleType="fitXY"
+            android:src="@drawable/guide_one_old"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"/>-->
+
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/guideOneIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/yindao_one_640" />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_width="@dimen/dp312"
+                android:layout_height="@dimen/dp160"
+                android:layout_marginBottom="@dimen/dp40"
+                android:src="@mipmap/guide_bottom_two" />
+
+        </FrameLayout>
 <!--        <TextView-->
 <!--            android:id="@+id/tv_text"-->
 <!--            android:text="@string/guide_1_top"-->

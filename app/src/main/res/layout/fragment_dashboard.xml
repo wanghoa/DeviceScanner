@@ -10,6 +10,7 @@
     tools:context=".ui.dashboard.DashboardFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="@dimen/dp32"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp30">
 
@@ -41,6 +42,7 @@
             android:layout_width="@dimen/dp25"
             android:layout_height="@dimen/dp25"
             android:layout_marginRight="@dimen/dp14"
+            android:visibility="invisible"
             android:src="@mipmap/icon_refresh"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

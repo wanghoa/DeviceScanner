@@ -12,51 +12,35 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         tools:context=".ui.guide.GuideSecondFragment">
-        <ImageView
+  <!--      <ImageView
             android:id="@+id/guideTwoIV"
-            android:src="@drawable/guide_two"
+            android:scaleType="centerCrop"
+            android:src="@drawable/guide_two_old"
             android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="match_parent"/>
-<!--        <TextView-->
-<!--            android:id="@+id/tv_text"-->
-<!--            android:text="@string/guide_2_top"-->
-<!--            style="@style/guide_top_text_style"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            android:layout_marginLeft="@dimen/dp52"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="110dp"/>-->
-<!--        <TextView-->
-<!--            android:text="@string/guide_2_bottom"-->
-<!--            style="@style/guide_bottom_text_style"-->
-<!--            app:layout_constraintLeft_toLeftOf="@id/tv_text"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"/>-->
-<!--        <RelativeLayout-->
-<!--            android:id="@+id/btn_next"-->
-<!--            android:layout_marginLeft="@dimen/dp20"-->
-<!--            android:layout_marginRight="@dimen/dp20"-->
-<!--            android:layout_marginBottom="@dimen/dp80"-->
-<!--            android:background="@drawable/bg_blue_corner"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/dp55">-->
-<!--            <TextView-->
-<!--                android:text="@string/continue_text"-->
-<!--                style="@style/guide_blue_button_text_style"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
-<!--            <ImageView-->
-<!--                android:layout_marginRight="@dimen/dp20"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:src="@drawable/ic_arrow_right"-->
-<!--                android:layout_width="@dimen/dp18"-->
-<!--                android:layout_height="@dimen/dp18"/>-->
-<!--        </RelativeLayout>-->
+            android:layout_height="match_parent"/>-->
+
+        <FrameLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/guideTwoIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/yindao_two_640" />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_width="@dimen/dp312"
+                android:layout_height="@dimen/dp160"
+                android:layout_marginBottom="@dimen/dp40"
+                android:src="@mipmap/gui_two" />
+
+        </FrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
