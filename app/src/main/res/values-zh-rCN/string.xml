@@ -1,62 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DeviceDetector</string>
-    <string name="app_name_main">Wi-Fi Device Sanner</string>
-    <string name="app_wifi_check">Wi-Fi Device Sanner</string>当前连接Wi-Fi:
-    <string name="wifi">Wi-Fi:</string>
-    <string name="ip">IP:</string>
-    <string name="home_des">  </string>
+    <string name="app_name_main">Wi-Fi 设备检测仪</string>
+    <string name="app_wifi_check">Wi-Fi 设备检测仪</string>
+    <string name="wifi">当前连接Wi-Fi:</string>
+    <string name="ip">IP地址:</string>
+    <string name="home_des">在设备搜索之后，您可以管理和 检查设备的ping，系统稍微 有点时间，所以请耐心等待！</string>
     <string name="app_camera_check">摄像头红点检测</string>
-    <string name="device_info">Device Info</string>
-    <string name="suspicious_device">Suspicious Devices</string>
+    <string name="device_info">设备信息</string>
+    <string name="suspicious_device">可疑设备</string>
     <string name="main_scan_wifi">Scan Network</string>
-    <string name="main_scan_network">Scan Network</string>
-    <string name="subscribe">Subscribe</string>
+    <string name="main_scan_network">扫描网络</string>
+    <string name="subscribe">订阅</string>
     <string name="copy">COPY MAC-ADDRESS</string>
-    <string name="main_searching_founded">Founded</string>
-    <string name="found">Found</string>
+    <string name="main_searching_founded">发现</string>
+    <string name="found">发现</string>
     <string name="main_searching_area">Scanning 11 from 235 IP range</string>
-    <string name="main_searching_finish">Scanning Finished</string>
-    <string name="scanning">Scanning</string>
-    <string name="from">from</string>
-    <string name="ip_range">IP range</string>
-    <string name="list_empty">empty</string>
-    <string name="suspicious">Suspicious Device</string>
-    <string name="suspicious_devices">suspicious device</string>
-    <string name="device_scanning">Scanning...</string>
-    <string name="ok">ok</string>
-    <string name="router">Router</string>
-    <string name="my_iPhone">My IPhone</string>
-    <string name="main_searching_finish_describe">Now you can manager devices,check their ping and more</string>
-    <string name="main_searching_finish_describetwo">You can view and monitor suspicious devices on your network</string>
-    <string name="main_searching_closed">Do not close the application during the entire scanning process, otherwise it will interrupt the process</string>
-    <string name="subscribe_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
+    <string name="main_searching_finish">扫描完成</string>
+    <string name="scanning">从</string>
+    <string name="from">IP 扫描到</string>
+    <string name="ip_range">范围</string>
+    <string name="list_empty">无可疑设备</string>
+    <string name="suspicious">可疑设备</string>
+    <string name="suspicious_devices">可疑设备</string>
+    <string name="device_scanning">扫描中,请稍后再试...</string>
+    <string name="ok">确认</string>
+    <string name="router">路由器</string>
+    <string name="my_iPhone">我的手机</string>
+    <string name="main_searching_finish_describe">现在您可以管理设备，检查它们的ping等</string>
+    <string name="main_searching_finish_describetwo">您可以查看和监控列表中的可疑设备</string>
+    <string name="main_searching_closed">在整个扫描过程中不要关闭应用程序，否则会中断扫描过程</string>
+    <string name="subscribe_description">WiFi 设备检测仪提￥158/6月,￥88/1月 等会员订阅.购买订阅的费用将从你所绑定的账户中收取。如需取消订阅,可前往GooglePlay取消订阅即可。如未在订阅期到期24小时前取消自动续费功能，将会自动续费及扣费。</string>
     <string name="safety_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
 
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_home">Wi-Fi Detect</string>
-    <string name="title_dashboard">Infrared Detect</string>
-    <string name="title_notifications">Guide</string>
+    <string name="title_home">智能探测</string>
+    <string name="title_dashboard">红外探测</string>
+    <string name="title_notifications">防偷拍攻略</string>
 
-    <string name="safety_strategy">Guidebook</string>
+    <string name="safety_strategy">防偷拍攻略</string>
     <string name="safety_be_secretly">投宿如何防止被偷拍</string>
     <string name="safety_be_can_appear">偷拍摄像头可能出现的地方</string>
     <string name="safety_strategy_action">防偷拍动作</string>
- <!--   <string name="safety_strategy_importantplace">Focus on！</string>-->
     <string name="safety_strategy_importantplace">重点关注位置！</string>
     <string name="safety_strategy_place">防偷拍重要防范地点</string>
     <string name="safety_strategy_out">出行时如何防偷拍</string>
-   <!-- <string name="safety_strategy_house">Home Security</string>-->
     <string name="safety_strategy_house">住所安全</string>
     <string name="safety_strategy_live">居住时如何防偷拍</string>
-   <!-- <string name="safety_strategy_live">How to prevent spying when Living</string>-->
     <string name="safety_strategy_help">如遇到被偷拍情况，及时报警，并向周围人求助。</string>
-<!--
-    <string name="safety_strategy_hostel">Rented hourses,hotels and even some upscale hotels.</string>
--->
     <string name="safety_strategy_hostel">出租的房屋、旅店，甚至一些高档的旅店。</string>
-<!--
-    <string name="safety_strategy_notice">1.When suing rental housing, pay attention to check the power socket holes,bath mirrors(especially in combination with one-way glass),smoke detectors,lamp sockets,ceillings,key holes,etc,and pay special attention to whether there are suspicious objects around the room.Wires,these are probably the power and signal wires for the hidden camera。</string>
--->
     <string name="safety_strategy_notice">1.使用出租的房屋注意检查各处的电源插座孔、浴镜，尤其是与单向玻璃结合使用）、烟雾感应器、灯座、天花板、钥匙孔等处，同时要特别留意房间周围是否有可疑电线，这些可能就是针孔摄像机的电源与信号线。</string>
     <string name="safety_strategy_out_import_des">从视觉上断绝偷拍可能的最有效途径。以安全裤为例，穿裙子时若穿了安全裤，能更有效保护个人隐私，防止隐私曝光。</string>
     <string name="safety_strategy_skirt_des">1.远离任何往你裙下移动的不明物体，无论是拐杖、还是鞋子、或者遥控玩具之类的。目前很多针孔摄像头已经做到非常小了，而且一些职业偷拍经常能弄出一些匪夷所思的装备。</string>
@@ -76,18 +68,19 @@
     <string name="safety_strategy_notice_des">使用出租的房屋注意检查各处的电源插座孔、浴镜，尤其是与单向玻璃结合使用）、烟雾感应器、灯座、天花板、钥匙孔等处，同时要特别留意房间周围是否有可疑电线，这些可能就是针孔摄像机的电源与信号线。。</string>
     <string name="safety_strategy_palce_des">酒店，宾馆，民宿安装的都是固定位置安装的偷拍装备。通常是借助有线线路持续不断供电和传输信号，搭载大功率高清晰度摄像头组和红外线，有线摄像头也可进行无线Wi-Fi信号传输录像，可实现本地存储。</string>
     <string name="safety_strategy_more">还有很多比如纸巾盒，音响，挂钩，钟表等等都是这些偷拍摄像头的"隐身"之处。</string>
-    <string name="setting">Setting</string>
-    <string name="restore_purchase">Restore Purchase</string>
-    <string name="subscribe_purchase">Subscribe</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="terms_service">Terms of service</string>
-    <string name="feekback">Feedback</string>
-    <string name="share">Share</string>
-    <string name="leave_message">Leave Message</string>
-    <string name="subscirbe_des">Easily find and detect hidden wireless devices around you</string>
-    <string name="one_month">1 month</string>
-    <string name="six_month">6 months</string>
-    <string name="pay">9.99 $</string>
-    <string name="pay_six">24.99 $</string>
-    <string name="most_popular">Most popular</string>
+    <string name="setting">设置</string>
+    <string name="restore_purchase">恢复购买</string>
+    <string name="subscribe_purchase">购买订阅</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="terms_service">服务条款</string>
+    <string name="feekback">意见反馈</string>
+    <string name="share">分享好友</string>
+    <string name="leave_message">评价</string>
+    <string name="subscirbe_des">轻松发现网络中可疑存在的威胁</string>
+    <string name="one_month">1 个月</string>
+    <string name="six_month">6 个月</string>
+    <string name="pay">￥88</string>
+    <string name="pay_six">￥158</string>
+    <string name="most_popular">最热门</string>
+
 </resources>
