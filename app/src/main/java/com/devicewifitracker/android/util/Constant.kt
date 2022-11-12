@@ -10,8 +10,8 @@ object Constant {
     val TERM_OF_USE_URL = "https://sites.google.com/view/pinholefinder-termsofuse/home"
 //    val PRIVAY_POLICY = "https://sites.google.com/view/bluetooth-finder-privacypolicy/home"
     val PRIVAY_POLICY = "https://sites.google.com/view/pinholefinder-privacypolicy/home"
-//    val EMAIL ="gudashan98@163.com"
-    val EMAIL ="517308295@qq.com"
+    val EMAIL ="gudashan98@163.com"
+//    val EMAIL ="517308295@qq.com"
 
 
 }

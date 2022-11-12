@@ -40,13 +40,13 @@ class SubscribeManager {
     fun initBilling(context: Context) {
         billingClient = BillingClient.newBuilder(context)
             .setListener(purchasesUpdatedListener)
-            .enablePendingPurchases()
+            .enablePendingPurchases()  //支持待处理的交易
             .build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(p0: BillingResult) {
                 LogUtils.file(TAG, "onBillingSetupFinished: code= ${p0.responseCode}")
                 LogUtils.file(TAG, "onBillingSetupFinished: message = ${p0.debugMessage}")
-                if (p0.responseCode == BillingClient.BillingResponseCode.OK) {//连接成功
+                if (p0.responseCode == BillingClient.BillingResponseCode.OK) {//连接成功 可以进行查询商品等操作
                     querySkuDetails()
                 } else {
                     disConnect("Error trying to connect to the Google play store:startConnection failed")
@@ -104,6 +104,7 @@ class SubscribeManager {
         PurchasesUpdatedListener { billingResult, purchases ->
             var code = billingResult.responseCode
             LogUtils.file(TAG, "PurchasesUpdatedListener==$code==${billingResult.debugMessage}")
+            //购买成功
             if (code == BillingClient.BillingResponseCode.OK) {
                 LogUtils.file(TAG, "purchasesUpdatedListener==OK")
                 if (purchases == null) {
@@ -111,6 +112,7 @@ class SubscribeManager {
                 } else {
                     processPurchases(purchases, false)
                 }
+                // 取消购买
             } else if (code == BillingClient.BillingResponseCode.USER_CANCELED) {
                 LogUtils.file(TAG, "purchasesUpdatedListener==USER_CANCELED")
                 if (!purchases.isNullOrEmpty()) {
@@ -134,12 +136,13 @@ class SubscribeManager {
 
     private fun disConnect(msg: String) {
         LogUtils.file(TAG, "disConnect==$msg")
-        ToastUtils.showShort("Google Service Disconnected")
+//        ToastUtils.showShort("Google Service Disconnected")
     }
 
 
     fun restore(activity: Activity,listener: BillingLaunchCallback?) {
         LogUtils.file(TAG, "restore==${productsWithUserCanceled}")
+//        ToastUtils.showLong("${productsWithUserCanceled}")
         if (productsWithUserCanceled.contains(skuYear)) {
             subscribe(activity, skuYear, listener)
         } else if (productsWithUserCanceled.contains(skuMonth)) {
@@ -197,6 +200,7 @@ class SubscribeManager {
                         TAG,
                         "launchBillingFlow success"
                     )
+                    ToastUtils.showShort("Success")
                     billingListener?.launchBillingResponse(true)
                     listener?.callback()
                 } else {
@@ -206,9 +210,11 @@ class SubscribeManager {
                         4,
                         "Error trying to connect to the Google play store:launch failed,Please try again"
                     )
+                    ToastUtils.showShort("Please try again")
                 }
             } else {
                 LogUtils.file(TAG, "no list")
+                ToastUtils.showShort("no list")
                 listener?.callback()
                 querySkuDetails()
                 billingListener?.launchBillingResponse(false)

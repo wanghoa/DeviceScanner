@@ -16,7 +16,7 @@ class GuideFirstFragment(private val callback : GuideCallback) : BaseFragment<Fr
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        binding.guideOneIV.setOnClickListener {
+        binding.next.setOnClickListener {
             callback.callback(0)
         }
     }

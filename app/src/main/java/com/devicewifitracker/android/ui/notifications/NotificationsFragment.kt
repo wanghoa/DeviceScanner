@@ -35,11 +35,11 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val barHeight = BarUtils.getStatusBarHeight()//获取状态栏高度
-        binding?.parentView?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        binding?.parentView?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
+//        val textView: TextView = binding.textNotifications
+//        notificationsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         initListener()
         return root
     }

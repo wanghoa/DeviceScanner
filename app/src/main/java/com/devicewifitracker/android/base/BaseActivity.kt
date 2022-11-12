@@ -1,23 +1,27 @@
 package com.devicewifitracker.android.base
 
+import android.app.Application
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.BarUtils
+import com.devicewifitracker.android.App
 import com.devicewifitracker.android.R
+import com.devicewifitracker.android.util.DisplayMetrics
 
 abstract class BaseActivity<DBinding : ViewDataBinding> : AppCompatActivity() {
     lateinit var binding: DBinding
     abstract  fun getLayoutId() :Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 //        requestedOrientation  = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = DataBindingUtil.setContentView(this,getLayoutId())
         //让view 与 model 感应起来 影响界面更新
         binding.lifecycleOwner  = this
-
+//        DisplayMetrics.setCustomDensity(this, App())
         initView(savedInstanceState)
         initData()
     }

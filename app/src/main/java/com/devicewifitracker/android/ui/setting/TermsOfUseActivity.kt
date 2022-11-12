@@ -8,6 +8,9 @@ import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivityTermsOfUseBinding
 import com.devicewifitracker.android.util.Constant
 
+/**
+ * 服务条款
+ */
 class TermsOfUseActivity : BaseActivity<ActivityTermsOfUseBinding>() {
 
     override fun getLayoutId() = R.layout.activity_terms_of_use

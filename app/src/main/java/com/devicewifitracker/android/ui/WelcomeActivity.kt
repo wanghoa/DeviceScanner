@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.devicewifitracker.android.BottomNavigationActivity
@@ -14,8 +15,10 @@ import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivityWelcomeBinding
 import com.devicewifitracker.android.ui.guide.GuideActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
 import com.devicewifitracker.android.util.Constant
 import com.devicewifitracker.android.util.PermissionUtil
+import com.devicewifitracker.android.util.SubscribeManager
 
 class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
     override fun getLayoutId(): Int  = R.layout.activity_welcome
@@ -30,10 +33,12 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
         mHandler.postDelayed(Runnable {
             permissionArray= arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.CHANGE_WIFI_STATE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
 
             )
             if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q){
@@ -53,6 +58,13 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
                 }
                 if(SPUtils.getInstance().getBoolean(Constant.GUIDE_KEY)){
 //                    startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+                    if (!SubscribeManager.instance.isSubscribe()) {
+                        SubscribeActivity.actionOpenAct(this@WelcomeActivity,
+                            Constant.GUIDE_USER_KEY
+                        )
+                        finish()
+                        return@subscribe
+                    }
                     startActivity(Intent(this@WelcomeActivity, BottomNavigationActivity::class.java))
                 }else{
                     startActivity(Intent(this@WelcomeActivity, GuideActivity::class.java))

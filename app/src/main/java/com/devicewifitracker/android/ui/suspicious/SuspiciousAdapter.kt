@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.devicewifitracker.android.databinding.SuspiciousListItemBinding
+import com.devicewifitracker.android.ui.detail.SuspiciousDetailActivity
 
 class SuspiciousAdapter(private val tableList: List<String>?) : RecyclerView.Adapter<SuspiciousAdapter.ViewHolder>() {
 
@@ -20,9 +21,11 @@ class SuspiciousAdapter(private val tableList: List<String>?) : RecyclerView.Ada
         val tableItemBinding = SuspiciousListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = ViewHolder(tableItemBinding)
         holder.itemView.setOnClickListener {
+
             val position = holder.bindingAdapterPosition
             val table = tableList?.get(position)
 //            DataActivity.actionOpenTable(parent.context, table.name)
+            table?.let { it1 -> SuspiciousDetailActivity.actionOpenAct(parent.context, it1,"unconfirmed") }
         }
         return holder
     }

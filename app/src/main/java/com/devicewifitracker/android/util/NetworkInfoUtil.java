@@ -91,6 +91,17 @@ public class NetworkInfoUtil {
         }).start();
     }
 
+    /**
+     * 1：通过java运行cmd命令，来通过arp命令获取同一网络下设备信息，对于支持linux 和windows的设备有效，像一些非智能设备，就无力回天了
+     *
+     * 2：使用android手机通过向子网内所有设备先发送一遍udp包，实现与在线的设备都进行通信一遍，
+     * 这样对应的路由信息就自动存储在本地手机中，然后在通过读取android 本机的arp缓存表，来获取设备信息
+     * ————————————————
+     * 版权声明：本文为CSDN博主「予渝与裕舆」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+     * 原文链接：https://blog.csdn.net/u012842328/article/details/107384978
+     * @param tv_main_result
+     * @return
+     */
 
     public static List<String> readArp(TextView tv_main_result) {
         try {

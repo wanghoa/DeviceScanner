@@ -18,6 +18,9 @@ import com.devicewifitracker.android.model.Infrared
 import com.devicewifitracker.android.ui.dashboard.adapter.InfraredAdapter
 import com.devicewifitracker.android.ui.setting.SettingActivity
 
+/**
+ * 红外探测
+ */
 class DashboardFragment : Fragment() {
 
     val list  = ArrayList<Infrared>()
@@ -62,7 +65,7 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val barHeight = BarUtils.getStatusBarHeight()//获取状态栏高度
-        binding?.container?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
+//        binding?.container?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
         val textView: TextView = binding.textDashboard
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
