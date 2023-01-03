@@ -88,9 +88,9 @@ var routerDao:RouterDao?= null
 //                                .getString(gatewayByWifi)
 //                        )
 //                    ) {
-                        val macAdd = MacAddressUtil.getMacAddress(App.context).trim()
-                         organization = organiaztionDao?.query(macAdd.substring(0, 8))
-                        LogUtils.d("查找到的厂商 = ${organization}--${macAdd.substring(0, 8)}")
+                        val macAdd = MacAddressUtil.getMacAddress(App.context)?.trim()
+                         organization = organiaztionDao?.query(macAdd?.substring(0, 8)?:"")
+                        LogUtils.d("查找到的厂商 = ${organization}--${macAdd?.substring(0, 8)}")
                         binding.tvOrganization.text =
                                             "Organization:" + "${organization}"
                                         SPUtils.getInstance()

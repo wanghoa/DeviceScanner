@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DeviceDetector</string>
+    <string name="app_name">DeviceDetector:Find WiFi</string>
     <string name="app_name_main">Wi-Fi 设备检测仪</string>
     <string name="app_wifi_check">Wi-Fi 设备检测仪</string>
     <string name="wifi">当前连接Wi-Fi:</string>

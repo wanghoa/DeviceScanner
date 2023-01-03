@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeviceDetector</string>
+    <string name="app_name">DeviceDetector:Find WiFi</string>
     <string name="app_name_main">Wi-Fi Device Sanner</string>
     <string name="app_wifi_check">Wi-Fi Device Sanner</string>当前连接Wi-Fi:
     <string name="wifi">Wi-Fi:</string>
