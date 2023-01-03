@@ -10,7 +10,7 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.devicewifitracker.android"
+        applicationId "com.findwifi.hiddendevicesdetetor"
 //        minSdk 21
 //        targetSdk 32
         minSdkVersion 24
