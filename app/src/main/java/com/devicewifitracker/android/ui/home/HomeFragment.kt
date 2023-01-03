@@ -89,10 +89,10 @@ class HomeFragment : Fragment(), Handler.Callback {
         }
         // 查看可疑设备列表
         binding?.mainSearching.nextll.setOnClickListener {
-            if (!SubscribeManager.instance.isSubscribe()) {
-                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-               return@setOnClickListener
-            }
+//            if (!SubscribeManager.instance.isSubscribe()) {
+//                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
+//               return@setOnClickListener
+//            }
             SuspiciousDevicActivity.actionOpenAct(
                 context,
                 susList as ArrayList<String>,
@@ -373,9 +373,12 @@ class HomeFragment : Fragment(), Handler.Callback {
                     SPUtils.getInstance().put(AGREEMENT_KEY, true)
 
                 } else {
-                    progress1++
-                    binding?.mainSearching.tvScanning.text =
-                        getString(R.string.scanning) + " " + "${progress1}" + " " + getString(R.string.from) + " " + "${254}" + " " + getString(R.string.ip_range)
+                    if (this.isAdded) {
+                        progress1++
+                        binding?.mainSearching.tvScanning.text =
+                            getString(R.string.scanning) + " " + "${progress1}" + " " + getString(R.string.from) + " " + "${254}" + " " + getString(R.string.ip_range)
+                    }
+
                 }
                 binding?.mainSearching.progressBar.progress = progress1
             }
