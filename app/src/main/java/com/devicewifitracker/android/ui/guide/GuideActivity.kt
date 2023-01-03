@@ -96,11 +96,11 @@ class GuideActivity : BaseActivity<ActivityGuideBinding>() {
         override fun callback(index: Int) {
             var currentIndex = binding.viewPager.currentItem
             if(index == 2){
-                if (!SubscribeManager.instance.isSubscribe()) {
-                    SubscribeActivity.actionOpenAct(this@GuideActivity,GUIDE_USER_KEY)
-                } else {
+//                if (!SubscribeManager.instance.isSubscribe()) {
+//                    SubscribeActivity.actionOpenAct(this@GuideActivity,GUIDE_USER_KEY)
+//                } else {
                     startActivity(Intent(this@GuideActivity, BottomNavigationActivity::class.java))
-                }
+//                }
                 finish()
             }else{
                 binding.viewPager.setCurrentItem(index+1,true)

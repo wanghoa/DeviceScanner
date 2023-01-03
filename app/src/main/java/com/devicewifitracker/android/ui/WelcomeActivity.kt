@@ -58,13 +58,13 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
                 }
                 if(SPUtils.getInstance().getBoolean(Constant.GUIDE_KEY)){
 //                    startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
-                    if (!SubscribeManager.instance.isSubscribe()) {
-                        SubscribeActivity.actionOpenAct(this@WelcomeActivity,
-                            Constant.GUIDE_USER_KEY
-                        )
-                        finish()
-                        return@subscribe
-                    }
+//                    if (!SubscribeManager.instance.isSubscribe()) {
+//                        SubscribeActivity.actionOpenAct(this@WelcomeActivity,
+//                            Constant.GUIDE_USER_KEY
+//                        )
+//                        finish()
+//                        return@subscribe
+//                    }
                     startActivity(Intent(this@WelcomeActivity, BottomNavigationActivity::class.java))
                 }else{
                     startActivity(Intent(this@WelcomeActivity, GuideActivity::class.java))

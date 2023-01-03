@@ -47,17 +47,17 @@ class TableAdapter(private val tableList: List<String>) :
                 ) && SPUtils.getInstance().getBoolean(Constant.AGREEMENT_KEY)
             ) {
 
-                if (!SubscribeManager.instance.isSubscribe()) {
-//                    startActivity(Intent(this@DeviceListActivity,SubscribeActivity::class.java))
-                    SubscribeActivity.actionOpenAct(parent.context,"")
-
-
-                } else {
+//                if (!SubscribeManager.instance.isSubscribe()) {
+////                    startActivity(Intent(this@DeviceListActivity,SubscribeActivity::class.java))
+//                    SubscribeActivity.actionOpenAct(parent.context,"")
+//
+//
+//                } else {
                     val position = holder.bindingAdapterPosition
                     val table = tableList[position]
 //            DataActivity.actionOpenTable(parent.context, table.name)
                     SuspiciousDetailActivity.actionOpenAct(parent.context, table, "confirmed")
-                }
+//                }
 
             } else {
 //                ToastUtils.showLong("数据检查中,请稍后...")

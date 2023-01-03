@@ -36,10 +36,10 @@ class InfraredAdapter(private val infraredList: List<Infrared>) :
             AdapterInfraredItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val holder = ViewHolder(tabItemBinding)
         holder.itemView.setOnClickListener {
-            if (!SubscribeManager.instance.isSubscribe()) {
-                parent.context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-               return@setOnClickListener
-            }
+//            if (!SubscribeManager.instance.isSubscribe()) {
+//                parent.context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
+//               return@setOnClickListener
+//            }
             GpuActivity.actionOpenAct(parent.context)
         }
         return holder
