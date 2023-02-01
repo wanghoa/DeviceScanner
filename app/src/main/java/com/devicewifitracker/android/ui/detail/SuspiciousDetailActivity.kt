@@ -97,66 +97,7 @@ var routerDao:RouterDao?= null
                             .put(gatewayByWifi, organization)
                     }
 
-//                        listOrga?.forEachIndexed { index, it ->
-//                            //获取了解路由器的Mac地址
-//                            if (macAdd.contains(
-//                                    it.organization.substring(0, 9).replace("-", ":").trim().toLowerCase()
-//                                )
-//                            ) {
-//                                runOnUiThread{
-//                                        organization = it.organization.substring(
-//                                            it.organization.substring(
-//                                                0, 9).length, it.organization.length)
-//                                        binding.tvOrganization.text =
-//                                            "Organization:" + "${organization}"
-//                                        SPUtils.getInstance()
-//                                            .put(gatewayByWifi, organization)
-//
-//                                }
-//                            }
-//                        }
-//                    }else {
-//                        runOnUiThread {
-//                            binding.tvOrganization.text =
-//                                "Organization:" + "${
-//                                    SPUtils.getInstance()
-//                                        .getString(gatewayByWifi)
-//                                }"
-//                        }
-//                    }
 
-                    /*  thread {
-                                    val map = ReadLocalTxt.readFromAssetsToMap(App.context,"dic_mac_company.txt_change")
-                                    map.forEach { i, s ->
-                //            LogUtils.e("map ==${s.toString().substring(0,s.toString().indexOf(" "))}")
-                //            LogUtils.e("map ==${ RegularExpressionUtil.reuglar(s.toString())}")
-                                        val content =    RegularExpressionUtil.reuglar(s.toString())
-                                        if (content.length > 9) {
-                                            // map ==18:16:C9	~   false  ~  18-16-C9	Samsung Electronics Co.,Lt  ~  Samsung Electronics Co.,Lt
-                              *//*      LogUtils.e("map ==${ content.substring(0,9).replace("-",":")}~" +
-                            "${MacAddressUtil.getMacAddress(App.context).contains(content.substring(0, 9).replace("-", ":")
-                    )}~${content.substring(content.indexOf(content.substring(0,9)) )}" +
-                            "~${content.substring(content.substring(0,9).length,content.length )}")*//*
-                      *//*      LogUtils.e("map ==${ content.substring(0,9).replace("-",":").trim().toLowerCase()}~" +
-                                    "${MacAddressUtil.getMacAddress(App.context)}----${MacAddressUtil.getMacAddress(App.context).contains(
-                                        RegularExpressionUtil.reuglar(s.toString()).substring(0, 9)
-                                            .replace("-", ":").trim().toLowerCase()
-                                    )}")*//*
-                            //获取了解路由器的Mac地址
-                            if (MacAddressUtil.getMacAddress(App.context).trim().contains(
-                                   content.substring(0, 9).replace("-", ":").trim().toLowerCase()
-                                )
-                            ) {
-                                runOnUiThread{
-                                    organization =  content.substring(content.substring(0,9).length,content.length )
-                                    binding.tvOrganization.text = "Organization:"+"${ organization}"
-                                    return@runOnUiThread
-                                }
-                            }
-                        }
-
-                    }
-                }*/
                 }
             }
             getIpAddressByWifi -> {
