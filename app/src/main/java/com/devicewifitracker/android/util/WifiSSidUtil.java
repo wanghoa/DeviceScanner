@@ -31,7 +31,7 @@ public class WifiSSidUtil {
         WifiInfo info = wifiManager.getConnectionInfo();
         String wifiId = info != null ? info.getSSID() : null;
         String result = wifiId != null ? wifiId.trim() : null;
-        LogUtils.e("SSID=" + result);
+        LogUtils.d("SSID=" + result);
         if (!TextUtils.isEmpty(result)) {
             if (result.charAt(0) == '"' && result.charAt(result.length() - 1) == '"') {
                 result = result.substring(1, result.length() - 1);
