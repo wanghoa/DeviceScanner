@@ -82,7 +82,6 @@ var routerDao:RouterDao?= null
                 Glide.with(this).load(R.mipmap.icon_green_duigou).into( binding.image1)
                 Glide.with(this).load(R.mipmap.icon_huise_gth).into( binding.image2)
                 thread {
-
 //                    if (TextUtils.isEmpty(
 //                            SPUtils.getInstance()
 //                                .getString(gatewayByWifi)
@@ -91,10 +90,13 @@ var routerDao:RouterDao?= null
                         val macAdd = MacAddressUtil.getMacAddress(App.context)?.trim()
                          organization = organiaztionDao?.query(macAdd?.substring(0, 8)?:"")
                         LogUtils.d("查找到的厂商 = ${organization}--${macAdd?.substring(0, 8)}")
+                    runOnUiThread {
                         binding.tvOrganization.text =
-                                            "Organization:" + "${organization}"
-                                        SPUtils.getInstance()
-                                            .put(gatewayByWifi, organization)
+                            "Organization:" + "${organization}"
+                        SPUtils.getInstance()
+                            .put(gatewayByWifi, organization)
+                    }
+
 //                        listOrga?.forEachIndexed { index, it ->
 //                            //获取了解路由器的Mac地址
 //                            if (macAdd.contains(
