@@ -54,7 +54,7 @@ class App : Application() {
                         // 截取前8位 使用":"替换“-”后转成小写
                         val macAddress =  content.substring(0, 9).replace("-", ":").trim().toLowerCase()
                         val company =  content.substring(content.substring(0, 9).length, content.length)
-                        LogUtils.d("数据库======${macAddress}~${company}")
+//                        LogUtils.d("数据库======${macAddress}~${company}")
                         organiaztionDao?.insertOrganization(Organization(null,macAddress,company))
 
 
