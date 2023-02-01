@@ -54,9 +54,12 @@ class TableAdapter(private val tableList: List<String>) :
 //
 //                } else {
                     val position = holder.bindingAdapterPosition
+                if (position!= -1){
                     val table = tableList[position]
 //            DataActivity.actionOpenTable(parent.context, table.name)
                     SuspiciousDetailActivity.actionOpenAct(parent.context, table, "confirmed")
+                }
+
 //                }
 
             } else {
