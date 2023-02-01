@@ -60,33 +60,23 @@ var routerDao:RouterDao?= null
             ClipboardUtils.copyText("${wifiInfo?.bssid}")
             ToastUtils.showLong("Copied")
             LogUtils.d("${wifiInfo?.bssid}------")
-//            LogUtils.d("${wifiInfo.macAddress}------")
         }
         binding.tvIP.text =    "IP Address:" +networkIp
         binding.back.setOnClickListener {
             finish()
         }
-//        val filter = IntentFilter()
-//        filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)
-//        registerReceiver(mReceiver,filter)
-//        val res =   wifiManager?.startScan()
-//        LogUtils.e("扫描wifi 结果：${MacAddressUtil.getMacAddress(App.context)}")
+
        val gatewayByWifi =  NetworkUtils.getGatewayByWifi()
         val getIpAddressByWifi =   NetworkUtils.getIpAddressByWifi()
         when (networkIp) {
             gatewayByWifi -> {
 
                 Glide.with(this).load(R.mipmap.icon_router_large).into(binding.imageWarm)
-
                 binding.copy.visibility = View.VISIBLE
                 Glide.with(this).load(R.mipmap.icon_green_duigou).into( binding.image1)
                 Glide.with(this).load(R.mipmap.icon_huise_gth).into( binding.image2)
                 thread {
-//                    if (TextUtils.isEmpty(
-//                            SPUtils.getInstance()
-//                                .getString(gatewayByWifi)
-//                        )
-//                    ) {
+
                         val macAdd = MacAddressUtil.getMacAddress(App.context)?.trim()
                          organization = organiaztionDao?.query(macAdd?.substring(0, 8)?:"")
                         LogUtils.d("查找到的厂商 = ${organization}--${macAdd?.substring(0, 8)}")
@@ -96,8 +86,6 @@ var routerDao:RouterDao?= null
                         SPUtils.getInstance()
                             .put(gatewayByWifi, organization)
                     }
-
-
                 }
             }
             getIpAddressByWifi -> {
@@ -123,10 +111,7 @@ var routerDao:RouterDao?= null
                     Glide.with(this).load(R.mipmap.icon_huise_duigou).into( binding.image1)
                     Glide.with(this).load(R.mipmap.icon_red_gth).into( binding.image2)
                 }
-
-
             }
-
         }
         binding.confirmed.setOnClickListener{
 //            binding.copy.visibility = View.VISIBLE
@@ -154,7 +139,6 @@ var routerDao:RouterDao?= null
                     }
                 }
 
-
             }
             if (networkIp == gatewayByWifi) {
                 Glide.with(this).load(R.mipmap.icon_router_large).into(binding.imageWarm)
@@ -163,9 +147,6 @@ var routerDao:RouterDao?= null
                     "Organization:" + "${organization}"
                 binding.copy.visibility = View.VISIBLE
             }
-
-
-
         }
         binding.unconfirmed.setOnClickListener{
             binding.copy.visibility = View.INVISIBLE
@@ -183,7 +164,6 @@ var routerDao:RouterDao?= null
 
             }
 
-//            binding.pingOrcheck.text =   "Check"
         }
         binding.checkPing.setOnClickListener {
             binding.pingOrcheck.text = "Ping..."
@@ -201,19 +181,6 @@ var routerDao:RouterDao?= null
             }.start()
         }
 
-//        binding.checkPing.setOnClickListener {
-//            binding.pingOrcheck.text = "Ping..."
-//            Thread{
-//            val list =    routerDao?.loadAllRouters()// 遍历打印数据中所有数据
-//                runOnUiThread {
-//                   list?.forEach {
-//                       LogUtils.e("IP==:${it.ip}")
-//
-//                   }
-//                }
-//
-//            }.start()
-//        }
     }
 
     val mReceiver = object :BroadcastReceiver(){
