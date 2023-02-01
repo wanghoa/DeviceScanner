@@ -47,7 +47,6 @@ class HomeFragment : Fragment(), Handler.Callback {
     private var isShowDialog = false
     private var routerDao: RouterDao? = null
 
-    //    private var organiaztionDao: OrganizationDao? = null
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -80,9 +79,7 @@ class HomeFragment : Fragment(), Handler.Callback {
 
     fun initView() {
         SPUtils.getInstance().put(AGREEMENT_KEY,false)
-//      val result =   AssetsUtil.getTex(App.context,"dic_mac_company.txt")
-//        val result = ReadLocalTxt.readFromAssets(App.context,"dic_mac_company.txt")
-//        LogUtils.d("Dic_mac_company =${result}")
+
         // 设置
         binding?.mainSetting.setOnClickListener {
             SettingActivity.actionOpenAct(context)
@@ -101,7 +98,6 @@ class HomeFragment : Fragment(), Handler.Callback {
         }
 
         routerDao = RoomGetDao.getRouterDao()
-//        organiaztionDao = RoomGetDao.getOrganizationDao()
         susList = ArrayList<String>()
         tableList = ArrayList<String>()
         adapter = TableAdapter(tableList!!)
@@ -139,38 +135,6 @@ class HomeFragment : Fragment(), Handler.Callback {
             )
             setProgress()
         }
-/*// 将 存进集合中的数据添加到数据库
-        if (TextUtils.isEmpty(
-                SPUtils.getInstance()
-                    .getString("MAC_ADRESS")
-            )
-        ) {
-            thread {
-
-
-                val map = ReadLocalTxt.readFromAssetsToMap(App.context,"dic_mac_company.txt")
-//            val map = ReadLocalTxt.readFromAssetsToMap(App.context,"dic_mac_company_change.txt")
-                map.forEach { i, s ->
-                    val content =    RegularExpressionUtil.reuglar(s.toString())// 正则去掉行号
-                    if (TextUtils.isEmpty(content)) {
-                        return@forEach
-                    }
-                    if (content.length > 9) {// 一分二十秒
-                        // 截取前8位 使用":"替换“-”后转成小写
-                        val macAddress =  content.substring(0, 9).replace("-", ":").trim().toLowerCase()
-                        val company =  content.substring(content.substring(0, 9).length, content.length)
-                        LogUtils.d("数据库======${macAddress}~${company}")
-                        organiaztionDao?.insertOrganization(Organization(null,macAddress,company))
-
-
-                    }
-                }
-                SPUtils.getInstance()
-                    .put("MAC_ADRESS","macAddress")
-            }
-        }*/
-
-
     }
 
     fun setProgress() {
@@ -279,8 +243,8 @@ class HomeFragment : Fragment(), Handler.Callback {
                 // TODO 这里是主线程
                 thread {
 //                    NetworkInfoUtil.sendDataToLoacl()
-                    val list = NetworkInfoUtil.getConnectIp()
-                    NetworkInfoUtil.readArp(binding.tvAppName)
+//                    val list = NetworkInfoUtil.getConnectIp()
+                    val list =   NetworkInfoUtil.readArp(binding.tvAppName)//获取到的数据数量与iOS一致
 //                    list.forEach {
 //                        LogUtils.e("局域网ip ====${it}")
 //                    }
@@ -293,8 +257,8 @@ class HomeFragment : Fragment(), Handler.Callback {
                     tableList?.clear()
 
                     if (!TextUtils.isEmpty(NetworkUtils.getIpAddressByWifi())) {
-                        list.add(0, NetworkUtils.getIpAddressByWifi())// 手机IP
-                        list.add(1, NetworkUtils.getGatewayByWifi())// 路由IP
+//                        list.add(0, NetworkUtils.getIpAddressByWifi())// 手机IP
+//                        list.add(1, NetworkUtils.getGatewayByWifi())// 路由IP
                         tableList?.add(0, NetworkUtils.getIpAddressByWifi())// 手机IP
                         tableList?.add(1, NetworkUtils.getGatewayByWifi())// 路由IP
                         if (!listIp.isNullOrEmpty()) {
