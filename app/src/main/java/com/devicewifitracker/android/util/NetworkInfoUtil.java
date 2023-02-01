@@ -98,7 +98,7 @@ public class NetworkInfoUtil {
      * 这样对应的路由信息就自动存储在本地手机中，然后在通过读取android 本机的arp缓存表，来获取设备信息
      * ————————————————
      * 版权声明：本文为CSDN博主「予渝与裕舆」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-     * 原文链接：https://blog.csdn.net/u012842328/article/details/107384978
+     * 原文链接：https://blog.csdn.net/u012842328/article/details/107384978 android获取局域网设备的ip和对应的mac地址
      * @param tv_main_result
      * @return
      */
@@ -142,8 +142,8 @@ public class NetworkInfoUtil {
         Runtime runtime = Runtime.getRuntime();
         Process proc = runtime.exec("ip neigh show");
         proc.waitFor();
-        BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-        //BufferedReader br = new BufferedReader(new FileReader("/proc/net/arp"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(proc.getInputStream()));//使用这个获取不到
+//        BufferedReader br = new BufferedReader(new FileReader("/proc/net/arp"));// 使用这个获取好多数据 Android12 崩溃   java.io.FileNotFoundException: /proc/net/arp: open failed: EACCES (Permission denied)
         String line;
         while ((line = br.readLine()) != null) {
             String[] splitted = line.split(" +");
