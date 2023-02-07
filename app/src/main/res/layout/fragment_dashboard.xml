@@ -58,7 +58,7 @@
         android:textSize="@dimen/font_size_16"
         android:textColor="@color/color_3FFFFB"
         android:background="@drawable/bg_setting"
-        android:text="点击下方位置按钮，进入到对应的地点位置检测"/>
+        android:text="@string/click_below"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

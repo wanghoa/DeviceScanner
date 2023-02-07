@@ -5,7 +5,7 @@
     <string name="wifi">Wi-Fi:</string>
     <string name="ip">IP:</string>
     <string name="home_des">  </string>
-    <string name="app_camera_check">摄像头红点检测</string>
+    <string name="app_camera_check">Infrared Detect</string>
     <string name="device_info">Device Info</string>
     <string name="suspicious_device">Suspicious Devices</string>
     <string name="main_scan_wifi">Scan Network</string>
@@ -107,4 +107,5 @@
     <string name="mirror">Mirror</string>
     <string name="sensor">Sensor</string>
     <string name="for_example">For_example</string>
+    <string name="click_below">Click below to start checking</string>
 </resources>

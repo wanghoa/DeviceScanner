@@ -68,8 +68,9 @@ class DashboardFragment : Fragment() {
 //        binding?.container?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
         val textView: TextView = binding.textDashboard
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+//            textView.text = it
         }
+        textView.text = resources.getString(R.string.click_below)
         binding?.mainSetting.setOnClickListener {
             SettingActivity.actionOpenAct(context)
         }

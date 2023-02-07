@@ -99,6 +99,7 @@
     <string name="wardrobe">衣柜</string>
     <string name="sensor">传感器</string>
     <string name="for_example">例如：</string>
+    <string name="click_below">点击下方位置按钮，进入到对应的地点位置检测</string>
 
 
 </resources>
