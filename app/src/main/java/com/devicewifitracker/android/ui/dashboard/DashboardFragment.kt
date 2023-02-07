@@ -54,7 +54,7 @@ class DashboardFragment : Fragment() {
           R.mipmap.icon_item_mirror,
           R.mipmap.icon_item_remotecontrol)
       val textList =   listOf<String>(
-          "电视","插座","台灯","床头柜","电视机柜子","衣柜","沙发","烟感器","沐浴头","花瓶","空调","路由器","加湿器","镜子","遥控器")
+          getString(R.string.tv),getString(R.string.socket),getString(R.string.desk_lamp),getString(R.string.bedside_cabinet),getString(R.string.tv_cabinet),getString(R.string.wardrobe),getString(R.string.soft),getString(R.string.smoke_detector),getString(R.string.shower_head),getString(R.string.flower_vase),getString(R.string.aircondition),getString(R.string.router),getString(R.string.humidifier),getString(R.string.mirror),getString(R.string.remote_control))
 
         for (i in 0..14) {
             list.add(Infrared(picList[i],textList[i]))

@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="居住时如何防偷拍"
+                android:text="@string/safety_strategy_live"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"

@@ -95,13 +95,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp15"
-                    android:text="例如："
+                    android:text="@string/for_example"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="传感器"
+                    android:text="@string/sensor"
                     android:layout_marginTop="@dimen/dp15"
                     android:textColor="@color/color_3FFFFB"
                     android:textSize="17sp"
@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="插座"
+                    android:text="@string/socket"
                     android:layout_marginTop="@dimen/dp15"
                     android:textColor="@color/color_3FFFFB"
                     android:textSize="17sp"
@@ -132,7 +132,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="路由器"
+                    android:text="@string/router"
                     android:layout_marginTop="@dimen/dp15"
                     android:textColor="@color/color_3FFFFB"
                     android:textSize="17sp"
@@ -157,7 +157,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="重点关注位置！"
+                    android:text="@string/safety_strategy_importantplace"
                     android:layout_marginTop="@dimen/dp15"
                     android:textColor="@color/color_3FFFFB"
                     android:textSize="17sp"

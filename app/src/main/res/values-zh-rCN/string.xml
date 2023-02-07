@@ -25,7 +25,7 @@
     <string name="suspicious_devices">可疑设备</string>
     <string name="device_scanning">扫描中,请稍后再试...</string>
     <string name="ok">确认</string>
-    <string name="router">路由器</string>
+
     <string name="my_iPhone">我的手机</string>
     <string name="main_searching_finish_describe">现在您可以管理设备，检查它们的ping等</string>
     <string name="main_searching_finish_describetwo">您可以查看和监控列表中的可疑设备</string>
@@ -82,5 +82,23 @@
     <string name="pay">￥88</string>
     <string name="pay_six">￥158</string>
     <string name="most_popular">最热门</string>
+    <string name="tv">电视</string>
+    <string name="socket">插座</string>
+    <string name="desk_lamp">台灯</string>
+    <string name="bedside_cabinet">床头柜</string>
+    <string name="tv_cabinet">电视机柜子</string>
+    <string name="soft">沙发</string>
+    <string name="smoke_detector">烟感器</string>
+    <string name="shower_head">沐浴头</string>
+    <string name="flower_vase">花瓶</string>
+    <string name="aircondition">空调</string>
+    <string name="remote_control">遥控器</string>
+    <string name="router">路由器</string>
+    <string name="humidifier">加湿器</string>
+    <string name="mirror">镜子</string>
+    <string name="wardrobe">衣柜</string>
+    <string name="sensor">传感器</string>
+    <string name="for_example">例如：</string>
+
 
 </resources>
