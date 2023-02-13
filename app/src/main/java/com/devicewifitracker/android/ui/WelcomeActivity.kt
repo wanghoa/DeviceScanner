@@ -48,6 +48,10 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
                 Manifest.permission.CAMERA,
 
             )
+            //  在 Android 10（API 级别 29）及更高版本中，您必须在应用的清单中声明 ACCESS_BACKGROUND_LOCATION
+            //  权限，以便请求在运行时于后台访问位置信息。在较低版本的 Android 系统中，
+            //  当应用获得前台位置信息访问权限时，也会自动获得后台位置信息访问权限
+
             if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q){
                 permissionArray.plus( Manifest.permission.ACCESS_BACKGROUND_LOCATION)
                 permissionArray.plus( Manifest.permission.ACCESS_FINE_LOCATION)
