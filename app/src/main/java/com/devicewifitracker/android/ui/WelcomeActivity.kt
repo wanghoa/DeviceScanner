@@ -24,7 +24,14 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
     override fun getLayoutId(): Int  = R.layout.activity_welcome
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        requestPermission()
+//        requestPermission()
+        if(SPUtils.getInstance().getBoolean(Constant.GUIDE_KEY)){
+
+            startActivity(Intent(this@WelcomeActivity, BottomNavigationActivity::class.java))
+        }else{
+            startActivity(Intent(this@WelcomeActivity, GuideActivity::class.java))
+        }
+        finish()
     }
 
     private var mHandler: Handler = Handler(Looper.getMainLooper())
