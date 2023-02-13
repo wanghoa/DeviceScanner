@@ -1,11 +1,14 @@
 package com.devicewifitracker.android.ui.detail
 
+import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.view.View
 import com.blankj.utilcode.util.*
@@ -16,10 +19,8 @@ import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivitySuspiciousDetailBinding
 import com.devicewifitracker.android.room.dao.OrganizationDao
 import com.devicewifitracker.android.room.dao.RouterDao
-import com.devicewifitracker.android.room.database.AppDatabase
 import com.devicewifitracker.android.room.entity.Router
 import com.devicewifitracker.android.util.*
-import java.util.*
 import kotlin.concurrent.thread
 import kotlin.random.Random
 
@@ -28,6 +29,7 @@ var routerDao:RouterDao?= null
     private var organiaztionDao: OrganizationDao? = null
     var wifiManager:WifiManager?= null
     var organization :String? = ""
+    private var mHandler: Handler = Handler(Looper.getMainLooper())
     companion object{
         fun actionOpenAct(context: Context,ip:String,from:String) {
             val intent = Intent(context,SuspiciousDetailActivity::class.java).apply {
@@ -70,23 +72,8 @@ var routerDao:RouterDao?= null
         val getIpAddressByWifi =   NetworkUtils.getIpAddressByWifi()
         when (networkIp) {
             gatewayByWifi -> {
+                requestPermission(gatewayByWifi)
 
-                Glide.with(this).load(R.mipmap.icon_router_large).into(binding.imageWarm)
-                binding.copy.visibility = View.VISIBLE
-                Glide.with(this).load(R.mipmap.icon_green_duigou).into( binding.image1)
-                Glide.with(this).load(R.mipmap.icon_huise_gth).into( binding.image2)
-                thread {
-
-                        val macAdd = MacAddressUtil.getMacAddress(App.context)?.trim()
-                         organization = organiaztionDao?.query(macAdd?.substring(0, 8)?:"")
-                        LogUtils.d("查找到的厂商 = ${organization}--${macAdd?.substring(0, 8)}")
-                    runOnUiThread {
-                        binding.tvOrganization.text =
-                            "Organization:" + "${organization}"
-                        SPUtils.getInstance()
-                            .put(gatewayByWifi, organization)
-                    }
-                }
             }
             getIpAddressByWifi -> {
                 Glide.with(this).load(R.mipmap.icon_phone).into(binding.imageWarm)
@@ -191,5 +178,46 @@ var routerDao:RouterDao?= null
             }
         }
 
+    }
+
+    private fun requestPermission(gatewayByWifi :String) {
+        var permissionArray: Array<String?>
+        mHandler.postDelayed(Runnable {
+            permissionArray= arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.CHANGE_WIFI_STATE,
+                )
+          //  在 Android 10（API 级别 29）及更高版本中，您必须在应用的清单中声明 ACCESS_BACKGROUND_LOCATION 权限，以便请求在运行时于后台访问位置信息。在较低版本的 Android 系统中，当应用获得前台位置信息访问权限时，也会自动获得后台位置信息访问权限
+            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q){
+//                permissionArray.plus( Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                permissionArray.plus( Manifest.permission.ACCESS_FINE_LOCATION)
+                permissionArray.plus(  Manifest.permission.ACCESS_COARSE_LOCATION)
+                permissionArray.plus(  Manifest.permission.ACCESS_WIFI_STATE)
+                permissionArray.plus(    Manifest.permission.CHANGE_WIFI_STATE)
+            }
+            PermissionUtil.requestPermission(this, permissionArray)?.subscribe { granted ->
+                if (!granted!!) {
+                    ToastUtils.showShort("You have denied relevant permissions")
+                }
+                Glide.with(this).load(R.mipmap.icon_router_large).into(binding.imageWarm)
+                binding.copy.visibility = View.VISIBLE
+                Glide.with(this).load(R.mipmap.icon_green_duigou).into( binding.image1)
+                Glide.with(this).load(R.mipmap.icon_huise_gth).into( binding.image2)
+                thread {
+
+                    val macAdd = MacAddressUtil.getMacAddress(App.context)?.trim()
+                    organization = organiaztionDao?.query(macAdd?.substring(0, 8)?:"")
+                    LogUtils.d("查找到的厂商 = ${organization}--${macAdd?.substring(0, 8)}")
+                    runOnUiThread {
+                        binding.tvOrganization.text =
+                            "Organization:" + "${organization}"
+                        SPUtils.getInstance()
+                            .put(gatewayByWifi, organization)
+                    }
+                }
+            }
+        }, 10)
     }
 }
