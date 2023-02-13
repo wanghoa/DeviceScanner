@@ -6,14 +6,21 @@ import android.content.Intent
 import android.hardware.Camera
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.blankj.utilcode.util.BarUtils
 import com.blankj.utilcode.util.FlashlightUtils
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.devicewifitracker.android.BottomNavigationActivity
 import com.devicewifitracker.android.GPUImageFilterTools
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivityGpuBinding
+import com.devicewifitracker.android.ui.guide.GuideActivity
+import com.devicewifitracker.android.util.Constant
 import com.devicewifitracker.android.util.PermissionUtil
 import com.devicewifitracker.android.util.doOnLayout
 import jp.co.cyberagent.android.gpuimage.GPUImageView
@@ -24,7 +31,6 @@ import jp.co.cyberagent.android.gpuimage.sample.utils.CameraLoader
 import jp.co.cyberagent.android.gpuimage.util.Rotation
 
 class GpuActivity :BaseActivity<ActivityGpuBinding>() {
-//    var camera:Camera?= null
     var ifOpen = false
     private var filterAdjuster: GPUImageFilterTools.FilterAdjuster? = null
     private val gpuImageView: GPUImageView by lazy { findViewById<GPUImageView>(R.id.surfaceView) }
@@ -51,21 +57,28 @@ class GpuActivity :BaseActivity<ActivityGpuBinding>() {
 //        binding?.constraint?.setPadding(0, ConvertUtils.dp2px(55.toFloat()) - barHeight, 0, 0)
         super.initView(savedInstanceState)
 //        camera = Camera.open(0)
-        var permissionArray: Array<String?>
-        permissionArray= arrayOf(
-           Manifest.permission.CAMERA,
-           Manifest.permission.WRITE_EXTERNAL_STORAGE
+        requestPermission()
+    }
+    private var mHandler: Handler = Handler(Looper.getMainLooper())
 
-            )
-        PermissionUtil.requestPermission(this, permissionArray)?.subscribe { granted ->
-            if (!granted!!) {
-                ToastUtils.showShort("You have denied relevant permissions")
-            }
-            switchFilterTo ( GPUImageFalseColorFilter())
-                 binding.back.setOnClickListener{
-                     finish()
-                 }
-            binding.flashLight.setOnClickListener {
+    private fun requestPermission() {
+
+        var permissionArray: Array<String?>
+        mHandler.postDelayed(Runnable {
+            permissionArray= arrayOf(Manifest.permission.CAMERA,)
+
+            if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q){ permissionArray.plus(  Manifest.permission.CAMERA) }
+
+            PermissionUtil.requestPermission(this, permissionArray)?.subscribe { granted ->
+                if (!granted!!) {
+                    // 点击拒绝后 才会执行到此处
+                    ToastUtils.showShort("You have denied relevant permissions")
+                }
+                switchFilterTo ( GPUImageFalseColorFilter())
+                binding.back.setOnClickListener{
+                    finish()
+                }
+                binding.flashLight.setOnClickListener {
 //                if (FlashlightUtils.isFlashlightEnable() && !FlashlightUtils.isFlashlightOn()) {
 //                    FlashlightUtils.setFlashlightStatus(true)
 //                } else {
@@ -74,68 +87,68 @@ class GpuActivity :BaseActivity<ActivityGpuBinding>() {
 //                    FlashlightUtils.destroy()
 //                }
 
-                if (!ifOpen) {
+                    if (!ifOpen) {
 //
-                    cameraLoader.openFlash(true)
+                        cameraLoader.openFlash(true)
 //                    cameraLoader.turnLightOn()
-                    ifOpen = true
-                } else {
-                  cameraLoader.openFlash(false)
-                    ifOpen = false
+                        ifOpen = true
+                    } else {
+                        cameraLoader.openFlash(false)
+                        ifOpen = false
+                    }
+
+                    /*     会崩溃 获取parameters失败
+                     val p = camera?.parameters
+
+                            if (!ifOpen) {
+                                ifOpen = true
+                                p?.flashMode = Camera.Parameters.FLASH_MODE_TORCH
+                                camera?.parameters = p
+                            } else {
+                                ifOpen = false
+                                p?.flashMode = Camera.Parameters .FLASH_MODE_OFF
+                                camera?.parameters = p
+                            }*/
+
                 }
-
-        /*     会崩溃 获取parameters失败
-         val p = camera?.parameters
-
-                if (!ifOpen) {
-                    ifOpen = true
-                    p?.flashMode = Camera.Parameters.FLASH_MODE_TORCH
-                    camera?.parameters = p
-                } else {
-                    ifOpen = false
-                    p?.flashMode = Camera.Parameters .FLASH_MODE_OFF
-                    camera?.parameters = p
-                }*/
-
-            }
-            binding.red.setOnClickListener {
-                switchFilterTo ( GPUImageFalseColorFilter())
-                binding.one.visibility = View.VISIBLE
-                binding.two.visibility = View.INVISIBLE
-                binding.three.visibility = View.INVISIBLE
-                binding.four.visibility = View.INVISIBLE
-            }
-            binding.green.setOnClickListener {
+                binding.red.setOnClickListener {
+                    switchFilterTo ( GPUImageFalseColorFilter())
+                    binding.one.visibility = View.VISIBLE
+                    binding.two.visibility = View.INVISIBLE
+                    binding.three.visibility = View.INVISIBLE
+                    binding.four.visibility = View.INVISIBLE
+                }
+                binding.green.setOnClickListener {
 //                switchFilterTo (  GPUImageRGBFilter(1.0f, 1.0f, 1.0f))
-                switchFilterTo (  GPUImageWhiteBalanceFilter(
-                    5000.0f,
-                    1.0f
-                ))
-                switchFilterTo (  GPUImageRGBFilter(0.0f, 1.0f, 0.0f))
-                binding.one.visibility = View.INVISIBLE
-                binding.two.visibility = View.VISIBLE
-                binding.three.visibility = View.INVISIBLE
-                binding.four.visibility = View.INVISIBLE
-            }
-            binding.blue.setOnClickListener {
-                switchFilterTo (  GPUImageWhiteBalanceFilter(
-                    5000.0f,
-                    1.0f
-                ))
-                switchFilterTo (  GPUImageRGBFilter(0.0f, 0.0f, 1.0f))
-                binding.one.visibility = View.INVISIBLE
-                binding.two.visibility = View.INVISIBLE
-                binding.three.visibility = View.VISIBLE
-                binding.four.visibility = View.INVISIBLE
-            }
-            binding.blackwith.setOnClickListener {
+                    switchFilterTo (  GPUImageWhiteBalanceFilter(
+                        5000.0f,
+                        1.0f
+                    ))
+                    switchFilterTo (  GPUImageRGBFilter(0.0f, 1.0f, 0.0f))
+                    binding.one.visibility = View.INVISIBLE
+                    binding.two.visibility = View.VISIBLE
+                    binding.three.visibility = View.INVISIBLE
+                    binding.four.visibility = View.INVISIBLE
+                }
+                binding.blue.setOnClickListener {
+                    switchFilterTo (  GPUImageWhiteBalanceFilter(
+                        5000.0f,
+                        1.0f
+                    ))
+                    switchFilterTo (  GPUImageRGBFilter(0.0f, 0.0f, 1.0f))
+                    binding.one.visibility = View.INVISIBLE
+                    binding.two.visibility = View.INVISIBLE
+                    binding.three.visibility = View.VISIBLE
+                    binding.four.visibility = View.INVISIBLE
+                }
+                binding.blackwith.setOnClickListener {
 //                switchFilterTo (GPUImageBrightnessFilter(1.5f))
-                switchFilterTo (GPUImagePixelationFilter())
-                binding.one.visibility = View.INVISIBLE
-                binding.two.visibility = View.INVISIBLE
-                binding.three.visibility = View.INVISIBLE
-                binding.four.visibility = View.VISIBLE
-            }
+                    switchFilterTo (GPUImagePixelationFilter())
+                    binding.one.visibility = View.INVISIBLE
+                    binding.two.visibility = View.INVISIBLE
+                    binding.three.visibility = View.INVISIBLE
+                    binding.four.visibility = View.VISIBLE
+                }
 
 //            val imageUri: Uri =
 //            gpuImageView = findViewById<GPUImageView>(R.id.gpuimageview)
@@ -144,28 +157,21 @@ class GpuActivity :BaseActivity<ActivityGpuBinding>() {
 //            binding?.surfaceView.setImage(imageUri)
 //            binding?.surfaceView.setFilter(GPUImageSepiaFilter())
 
-            // Later when image should be saved saved:
-            cameraLoader.setOnPreviewFrameListener { data, width, height ->
-                gpuImageView.updatePreviewFrame(data, width, height)
+                // Later when image should be saved saved:
+                cameraLoader.setOnPreviewFrameListener { data, width, height ->
+                    gpuImageView.updatePreviewFrame(data, width, height)
+                }
+                gpuImageView.setRotation(getRotation(cameraLoader.getCameraOrientation()))
+                gpuImageView.setRenderMode(GPUImageView.RENDERMODE_CONTINUOUSLY)
+
+                gpuImageView.doOnLayout {
+                    cameraLoader.onResume(it.width, it.height)
+                }
             }
-            gpuImageView.setRotation(getRotation(cameraLoader.getCameraOrientation()))
-            gpuImageView.setRenderMode(GPUImageView.RENDERMODE_CONTINUOUSLY)
+        }, 10)
 
-        }
-
-//        findViewById<View>(R.id.img_switch_camera).run {
-//            if (!cameraLoader.hasMultipleCamera()) {
-//                visibility = View.GONE
-//            }
-//            setOnClickListener {
-//                cameraLoader.switchCamera()
-//                gpuImageView.setRotation(getRotation(cameraLoader.getCameraOrientation()))
-//            }
-//        }
 
     }
-
-
 
     private fun switchFilterTo(filter: GPUImageFilter) {
         if (gpuImageView.filter == null || gpuImageView.filter!!.javaClass != filter.javaClass) {
@@ -184,9 +190,6 @@ class GpuActivity :BaseActivity<ActivityGpuBinding>() {
     }
     override fun onResume() {
         super.onResume()
-        gpuImageView.doOnLayout {
-            cameraLoader.onResume(it.width, it.height)
-        }
     }
 
     override fun onPause() {
