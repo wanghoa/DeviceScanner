@@ -9,12 +9,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -114,17 +116,20 @@ public class NetworkInfoUtil {
             String mac = "";
 //            tv_main_result.setText("");
             if (br.readLine() == null) {
-//                Log.e("scanner", "readArp: null");
+                LogUtils.e("scanner", "readArp: null");
             }
+            LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length() + " ;line= " + line.length());
+
             while ((line = br.readLine()) != null) {
                 line = line.trim();
+                //line=  192.168.0.110    0x1         0x2         d6:ab:d3:49:2e:f6     *        wlan0 ;length =77
                 if (line.length() < 63) continue;
                 if (line.toUpperCase(Locale.US).contains("IP")) continue;
                 ip = line.substring(0, 17).trim();
                 flag = line.substring(29, 32).trim();
                 mac = line.substring(41, 63).trim();
                 if (mac.contains("00:00:00:00:00:00")) continue;
-                LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
+//                LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
 //                tv_main_result.append("\nip:" + ip + "\tmac:" + mac);
                 ipList.add(ip);
 
@@ -135,8 +140,69 @@ public class NetworkInfoUtil {
         }
         return null;
     }
-   // Android 10以上版本使用  （待验证）
 
+    /**
+     * 适配Android 10 以上机型 代替 readArp（） android 10 及以上禁止使用 绝对路径获取文件
+     */
+    private static final String IP_CMD = "ip neighbor";
+    public static List<String> readArp1() {
+        String line = "";
+        String ip = "";
+        String flag = "";
+        String mac = "";
+        List<String> ipList = new ArrayList<>();
+        BufferedReader reader = null;
+        try {
+            Process ipProc = null;
+                ipProc = Runtime.getRuntime().exec(IP_CMD);
+                ipProc.waitFor();
+            LogUtils.d("ipProc.exitValue()", "value=" + ipProc.exitValue());
+        ;
+            if (ipProc.exitValue() != 0) {//方法返回子进程的退出值。
+                    throw new Exception("Unable to access ARP entries");
+                }
+            reader = new BufferedReader(new InputStreamReader(ipProc.getInputStream(), "UTF-8"));
+
+            while ((line = reader.readLine()) != null) {
+//                String[] neighborLine = line.split("\\s+");
+//                // We don't have a validated ARP entry for this case.
+//                if (neighborLine.length <= 4) {
+//                    continue;
+//                }
+//                String ipaddr = neighborLine[0];
+//                InetAddress addr = InetAddress.getByName(ipaddr);
+//                if (addr.isLinkLocalAddress() || addr.isLoopbackAddress()) {
+//                    continue;
+//                }
+//                String macAddress = neighborLine[4];
+                line = line.trim();
+                LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length() + " ;line= " + line.length());
+                //line= 192.168.0.117 dev wlan0 lladdr 10:08:b1:e6:d4:e7 STALE
+                if (line.length() < 54) continue;
+                if (line.toUpperCase(Locale.US).contains("IP")) continue;
+                ip = line.substring(0, 14).trim();
+//                flag = line.substring(29, 32).trim();
+                mac = line.substring(31, 48).trim();
+                if (mac.contains("00:00:00:00:00:00")) continue;
+                LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
+                ipList.add(ip);
+            }
+            reader.close();
+            return ipList;
+            // Android 10以上版本使用  （待验证）
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }  catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public  static ArrayList<String> getConnectIp() throws Exception {
         ArrayList<String> connectIpList = new ArrayList<String>();
         Runtime runtime = Runtime.getRuntime();
