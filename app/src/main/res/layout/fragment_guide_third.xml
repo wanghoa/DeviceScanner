@@ -29,7 +29,7 @@
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_guide_c" />
+                android:src="@mipmap/icon_guide_c" />
 
             <ImageView
                 android:id="@+id/next"
