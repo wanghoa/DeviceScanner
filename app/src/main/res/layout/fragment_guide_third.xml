@@ -26,17 +26,16 @@
 
             <ImageView
                 android:id="@+id/guideThreeIv"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/yindao_three_720" />
+                android:src="@drawable/icon_guide_c" />
 
             <ImageView
                 android:id="@+id/next"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_width="@dimen/dp312"
                 android:layout_height="@dimen/dp180"
-                android:scaleType="centerCrop"
                 android:layout_marginBottom="@dimen/dp40"
                 android:src="@mipmap/guide_bottom_three" />
 

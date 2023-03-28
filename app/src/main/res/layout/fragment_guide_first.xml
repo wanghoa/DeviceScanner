@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/yindao_one_640" />
+                android:src="@drawable/icon_guide_a" />
 
             <ImageView
                 android:id="@+id/next"
