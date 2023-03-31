@@ -60,6 +60,10 @@
         <activity
             android:name=".ui.subscribe.SubscribeActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ui.subscribe.SubscribeActivityNew"
+            android:exported="false" />
         <activity
             android:name=".DeviceScannerActivity"
             android:exported="false" />

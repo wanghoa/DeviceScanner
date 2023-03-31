@@ -32,6 +32,10 @@
     <string name="subscribe_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
     <string name="safety_description">Wi-Fi Device Detector provide . 1 Month 9.99＄ ，6Month 24.99＄ . The purchase of a subscription will be charged from your Apple ID account tied to the App Store or from your iTunes account. To unsubscribe, go to the App Store, go to "Account Settings - Subscription Record", and unsubscribe. If you do not cancel the automatic renewal function 24 hours before the subscription period expires, the subscription will be automatically renewed and deducted.</string>
 
+    <string name="unlimited">Unlimited detection of devices</string>
+    <string name="scan">Scan devices using technology</string>
+    <string name="deep">Deep detect and list all device information</string>
+    <string name="fully">Fully guarantees privacy and security</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_home">Wi-Fi Detect</string>
     <string name="title_dashboard">Infrared Detect</string>
@@ -77,6 +81,7 @@
     <string name="safety_strategy_more">There are many other places, such as tissue boxes, sound, hooks, clocks and so on, where these cameras are invisible.</string>
     <string name="setting">Setting</string>
     <string name="restore_purchase">Restore Purchase</string>
+    <string name="restore">Restore</string>
     <string name="subscribe_purchase">Subscribe</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_service">Terms of service</string>
@@ -84,12 +89,24 @@
     <string name="share">Share</string>
     <string name="leave_message">Leave Message</string>
     <string name="subscirbe_des">Easily find and detect hidden wireless devices around you</string>
-    <string name="one_month">1 month</string>
-    <string name="six_month">6 months</string>
+    <string name="subscirbe_des_new">Detects Hidden Devices Around You</string>
+    <string name="one_month">1 Month</string>
+    <string name="one_week">1 Week</string>
+    <string name="six_month">6 Months</string>
     <string name="pay">9.99 $</string>
+    <string name="sevent_pay">$7.99 </string>
+    <string name="two_pay">$2.99 </string>
+    <string name="nineth_pay">$19.99 </string>
     <string name="pay_six">24.99 $</string>
+    <string name="two_week">$2.00/week</string>
+    <string name="three_week">$2.99/week</string>
+    <string name="onepointsix_week">$1.67/week</string>
     <string name="most_popular">Most popular</string>
-
+    <string name="one">1</string>
+    <string name="three">3</string>
+    <string name="month">Month</string>
+    <string name="week">Week</string>
+    <string name="months">Months</string>
     <string name="tv">TV</string>
     <string name="socket">Socket</string>
     <string name="desk_lamp">DeskLamp</string>
