@@ -22,8 +22,9 @@ class SubscribeManager {
     }
 
     private lateinit var billingClientLifecycle: BillingClientLifecycle
-    val skuMonth = "com.devicewifitracker.android.month"
-    val skuYear = "com.devicewifitracker.android.year"
+    val skuWeek= "com.findwifi.hiddendevices.week"// 周 2.99
+    val skuMonth = "com.findwifi.hiddendevices.month"// 月 7.99
+    val skuYear = "com.findwifi.hiddendevices.3months"// 3个月 19.99
     private val skuList = listOf(skuMonth, skuYear)
     private var billingListener: BillingListener? = null
     private var skuDetailList: List<ProductDetails>? = null
@@ -45,7 +46,9 @@ class SubscribeManager {
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(p0: BillingResult) {
                 LogUtils.file(TAG, "onBillingSetupFinished: code= ${p0.responseCode}")
+                LogUtils.d(TAG, "onBillingSetupFinished: code= ${p0.responseCode}")
                 LogUtils.file(TAG, "onBillingSetupFinished: message = ${p0.debugMessage}")
+                LogUtils.d(TAG, "onBillingSetupFinished: message = ${p0.debugMessage}")
                 if (p0.responseCode == BillingClient.BillingResponseCode.OK) {//连接成功 可以进行查询商品等操作
                     querySkuDetails()
                 } else {
@@ -164,6 +167,10 @@ class SubscribeManager {
 //    fun subscribe(activity: Activity, sku: String) : Int{
 //        return billingClientLifecycle?.launchBillingFlow(activity,sku)
 //    }
+    /**
+     *启动购买流程https://developer.android.com/google/play/billing/integrate?hl=zh-cn
+     * sku 商品ID
+     */
 
     fun subscribe(activity: Activity, sku: String, listener: BillingLaunchCallback?) {
         LogUtils.file(TAG, "subscribe sku=$sku")
@@ -195,7 +202,7 @@ class SubscribeManager {
                 val responseCode: Int =
                     billingClient.launchBillingFlow(activity, billingFlowParams).responseCode
                 LogUtils.file(TAG, "launchBillingFlow==$responseCode")
-                if (responseCode == BillingClient.BillingResponseCode.OK) {
+                if (responseCode == BillingClient.BillingResponseCode.OK) {//BillingResponseCode 为 OK 表示成功启动 （成功调用 launchBillingFlow() 后，系统会显示 Google Play 购买界面。图 1 显示了订阅的购买屏幕）
                     LogUtils.file(
                         TAG,
                         "launchBillingFlow success"
