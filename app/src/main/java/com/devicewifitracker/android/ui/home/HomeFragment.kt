@@ -5,14 +5,11 @@ import android.content.Context
 import android.content.DialogInterface
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.os.*
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,13 +19,10 @@ import com.blankj.utilcode.util.*
 import com.devicewifitracker.android.App
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.databinding.FragmentHomeBinding
-import com.devicewifitracker.android.room.dao.OrganizationDao
 import com.devicewifitracker.android.room.dao.RouterDao
-import com.devicewifitracker.android.room.database.AppDatabase
-import com.devicewifitracker.android.room.entity.Organization
 import com.devicewifitracker.android.room.entity.Router
 import com.devicewifitracker.android.ui.setting.SettingActivity
-import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.ui.suspicious.SuspiciousDevicActivity
 import com.devicewifitracker.android.ui.table.TableAdapter
 import com.devicewifitracker.android.util.*
@@ -86,10 +80,11 @@ class HomeFragment : Fragment(), Handler.Callback {
         }
         // 查看可疑设备列表
         binding?.mainSearching.nextll.setOnClickListener {
-//            if (!SubscribeManager.instance.isSubscribe()) {
+            if (!SubscribeManager.instance.isSubscribe()) {
 //                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-//               return@setOnClickListener
-//            }
+                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1,"") }
+               return@setOnClickListener
+            }
             SuspiciousDevicActivity.actionOpenAct(
                 context,
                 susList as ArrayList<String>,
@@ -140,36 +135,38 @@ class HomeFragment : Fragment(), Handler.Callback {
     fun setProgress() {
         runnable = object : Runnable {
             override fun run() {
+                //此处可以使用 valueAnimator 动画进行优化
                 when (progress1) {
-                    in 20..50 -> {
-                        mHandler?.postDelayed(this, 500)
-                    }
-                    in 50..80 -> {
-                        mHandler?.postDelayed(this, 400)
-                    }
-                    in 80..100 -> {
-                        mHandler?.postDelayed(this, 600)
-                    }
+
+//                    in 20..50 -> {
+//                        mHandler?.postDelayed(this, 300)
+//                    }
+//                    in 50..80 -> {
+//                        mHandler?.postDelayed(this, 270)
+//                    }
+//                    in 80..100 -> {
+//                        mHandler?.postDelayed(this, 260)
+//                    }
                     in 100..150 -> {
-                        mHandler?.postDelayed(this, 550)
+                        mHandler?.postDelayed(this, 300)
                     }
                     in 150..200 -> {
-                        mHandler?.postDelayed(this, 600)
+                        mHandler?.postDelayed(this, 150)
                     }
                     in 200..240 -> {
-                        mHandler?.postDelayed(this, 500)
+                        mHandler?.postDelayed(this, 80)
                     }
                     in 240..254 -> {
-                        mHandler?.postDelayed(this, 660)
+                        mHandler?.postDelayed(this, 60)
                     }
                     else -> {
-                        mHandler?.postDelayed(this, 360)
+                        mHandler?.postDelayed(this, 460)
                     }
                 }
                 mHandler?.sendEmptyMessage(1)
             }
         }
-        mHandler = Handler(this)
+//        mHandler = Handler(this)
         mHandler?.postDelayed(runnable as Runnable, 0)
 
     }
@@ -229,8 +226,7 @@ class HomeFragment : Fragment(), Handler.Callback {
     @SuppressLint("MissingPermission")
     fun scanwifi() {
         //获取 WIFI名称
-        val wifiManager =
-            App.context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wifiManager = App.context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val wifiInfo = wifiManager.connectionInfo //获取当前连接的信息
         val dhcpInfo = wifiManager.dhcpInfo  //获取DHCP 的信息
 //        binding?.main.tvWifiName?.text = "当前连接Wi-Fi:" + " " + wifiInfo.ssid.replace("\"", "")
@@ -243,19 +239,13 @@ class HomeFragment : Fragment(), Handler.Callback {
                 // TODO 这里是主线程
                 thread {
 //                    NetworkInfoUtil.sendDataToLoacl()
-//                    val list = NetworkInfoUtil.getConnectIp()
-                    val list =   NetworkInfoUtil.readArp(binding.tvAppName)//获取到的数据数量与iOS一致
-//                    list.forEach {
-//                        LogUtils.e("局域网ip ====${it}")
-//                    }
+//                    val arpList =   NetworkInfoUtil.readArp(binding.tvAppName)
+                    val arpList =   NetworkInfoUtil.readArp1()//TODO 获取到的数据数量与iOS一致
+                    LogUtils.d("可疑设备数量=="+ "${arpList.size}")
                     val listIp = routerDao?.loadAllRouters()// 获取数据库中的所有数据
                     roomListIp = listIp
-//                    listIp?.forEach {
-//                        LogUtils.e("数据库中ip ====${it}")
-//                    }
 //              activity?. runOnUiThread {
                     tableList?.clear()
-
                     if (!TextUtils.isEmpty(NetworkUtils.getIpAddressByWifi())) {
 //                        list.add(0, NetworkUtils.getIpAddressByWifi())// 手机IP
 //                        list.add(1, NetworkUtils.getGatewayByWifi())// 路由IP
@@ -266,7 +256,6 @@ class HomeFragment : Fragment(), Handler.Callback {
                                 if (!tableList!!.contains(router.ip)) {
                                     tableList?.add(router.ip)
                                 }
-
                             }
                         }
                     }
@@ -282,15 +271,12 @@ class HomeFragment : Fragment(), Handler.Callback {
                             adapter?.notifyDataSetChanged()
                         }
                     }, 300)
-                    // list?.let { tableList?.addAll(it) }
 
 //                }
                     //  通过Wi-Fi名称 过滤是否是可信网络（）
-                    list?.forEachIndexed { index, scanResult ->
+                    arpList?.forEachIndexed { index, scanResult ->
                         //  前者自己IP 后者 路由IP
-                        if (!NetworkUtils.getIpAddressByWifi()
-                                .equals(scanResult) && !NetworkUtils.getGatewayByWifi()
-                                .equals(scanResult)
+                        if (!NetworkUtils.getIpAddressByWifi().equals(scanResult) && !NetworkUtils.getGatewayByWifi().equals(scanResult)
                         ) {
                             if (!susList!!.contains(scanResult)) {
                                 susList?.add(scanResult)
@@ -333,14 +319,16 @@ class HomeFragment : Fragment(), Handler.Callback {
                         it.height = ConvertUtils.dp2px(180f)
                     }
 //                    progress1 = 0
-
                     SPUtils.getInstance().put(AGREEMENT_KEY, true)
-
+                    binding.mainSearching.progressTv.text = "${100}%"
                 } else {
                     if (this.isAdded) {
                         progress1++
                         binding?.mainSearching.tvScanning.text =
                             getString(R.string.scanning) + " " + "${progress1}" + " " + getString(R.string.from) + " " + "${254}" + " " + getString(R.string.ip_range)
+                        var percentage=  (progress1*100.0/254.0 ).toInt()
+                        var progressText = "${percentage}%"
+                        binding.mainSearching.progressTv.text = progressText
                     }
 
                 }
