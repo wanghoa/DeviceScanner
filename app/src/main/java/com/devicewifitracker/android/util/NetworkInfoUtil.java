@@ -2,9 +2,7 @@ package com.devicewifitracker.android.util;
 
 import android.text.TextUtils;
 import android.widget.TextView;
-
 import com.blankj.utilcode.util.LogUtils;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -108,8 +106,7 @@ public class NetworkInfoUtil {
     public static List<String> readArp(TextView tv_main_result) {
         try {
             List<String> ipList = new ArrayList<>();
-            BufferedReader br = new BufferedReader(
-                    new FileReader("/proc/net/arp"));
+            BufferedReader br = new BufferedReader(new FileReader("/proc/net/arp"));
             String line = "";
             String ip = "";
             String flag = "";
@@ -129,7 +126,7 @@ public class NetworkInfoUtil {
                 flag = line.substring(29, 32).trim();
                 mac = line.substring(41, 63).trim();
                 if (mac.contains("00:00:00:00:00:00")) continue;
-//                LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
+                LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
 //                tv_main_result.append("\nip:" + ip + "\tmac:" + mac);
                 ipList.add(ip);
 
@@ -185,6 +182,7 @@ public class NetworkInfoUtil {
                 mac = line.substring(31, 48).trim();
                 if (mac.contains("00:00:00:00:00:00")) continue;
                 LogUtils.d("scanner", "readArp: mac= " + mac + " ; ip= " + ip + " ;flag= " + flag);
+
                 ipList.add(ip);
             }
             reader.close();
@@ -220,4 +218,61 @@ public class NetworkInfoUtil {
         }
         return connectIpList;
     }
+
+    public static List<String> getPingIp() {
+        try {
+            String ipAddress = "127.0.0.1"; // 要 Ping 的 IP 地址
+            String pingCommand = "/system/bin/ping -c 1 " + ipAddress; // Ping 命令
+            Runtime runtime = Runtime.getRuntime();
+//            Process process = runtime.exec(pingCommand);
+            Process process = runtime.exec("arp -a");
+            int exitCode = process.waitFor(); // 等待 Ping 命令执行完成
+            if (exitCode == 0) {
+                // Ping 成功
+                // 从 Ping 命令的输出中提取相关信息
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                String ip = "";
+                String flag = "";
+                String mac = "";
+                List<String> ipList = new ArrayList<>();
+                while ((line = bufferedReader.readLine()) != null) {
+                    // 处理 Ping 命令的输出
+                    line = line.trim();
+                    LogUtils.d("Ping++", "Ping: line= " + line + " ; line= " + line.length());
+
+                }
+                bufferedReader.close();
+                return ipList;
+            } else {
+                // Ping 失败
+            }
+
+        } catch (IOException e) {
+            // 处理 IOException 异常
+        } catch (InterruptedException e) {
+            // 处理 InterruptedException 异常
+        }
+        return null;
+    }
+
+
+
+/*    public static List<LinkAddress> getAndrid12(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+
+        LinkProperties linkProperties = connectivityManager.getLinkProperties(  connectivityManager.getActiveNetwork());
+//        LinkProperties linkProperties = connectivityManager.getActiveNetwork().getLinkProperties();
+
+// 获取当前连接的 IP 地址列表
+        List<LinkAddress> linkAddresses = linkProperties.getLinkAddresses();
+
+// 获取 ARP 缓存表中的对应关系
+
+        Map<InetAddress, MacAddress> arpCache = ARPCache.get(linkAddresses);
+        return linkAddresses;
+
+    }*/
+
+
 }
