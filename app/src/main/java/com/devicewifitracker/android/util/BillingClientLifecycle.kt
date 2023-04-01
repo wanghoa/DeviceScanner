@@ -105,7 +105,8 @@ class BillingClientLifecycle private constructor(
             productList.add(
                 QueryProductDetailsParams.Product.newBuilder()
                     .setProductId(product)
-                    .setProductType(BillingClient.ProductType.SUBS)
+                    .setProductType(BillingClient.ProductType.SUBS)//查询订阅类型的商品
+//                    .setProductType(BillingClient.ProductType.INAPP)//查询内购类型的商品一次性商品
                     .build()
             )
         }
@@ -176,6 +177,9 @@ class BillingClientLifecycle private constructor(
 
     /**
      * Called by the Billing Library when new purchases are detected.
+     * https://developer.android.com/google/play/billing/integrate?hl=zh-cn
+     * Google Play 会调用 onPurchasesUpdated()，以将购买操作的结果传送给实现 PurchasesUpdatedListener 接口的监听器。您可以在初始化客户端时使用 setListener() 方法指定监听器。
+    您必须实现 onPurchasesUpdated() 来处理可能的响应代码。以下示例展示了如何替换 onPurchasesUpdated()
      */
     override fun onPurchasesUpdated(
         billingResult: BillingResult,
@@ -268,7 +272,7 @@ class BillingClientLifecycle private constructor(
                 .setProductDetails(skuDetails)
                 .build()
             billingFlowParamsBuilder.setProductDetailsParamsList(listOf(p))
-
+//启动购买，返回BillingResult。
             val billingResult = billingClient.launchBillingFlow(
                 activity!!,
                 billingFlowParamsBuilder.build()
@@ -336,9 +340,13 @@ class BillingClientLifecycle private constructor(
     companion object {
         private const val TAG = "BillingLifecycle"
         private const val MAX_RETRY_ATTEMPT = 3
-        val skuMonth = "com.bluetoothdevices.finder.month"
-        val skuYear = "com.bluetoothdevices.finder.year"
+//        val skuMonth = "com.bluetoothdevices.finder.month"
+//        val skuYear = "com.bluetoothdevices.finder.year"
+        val skuWeek= "com.findwifi.hiddendevices.week"// 周 2.99
+        val skuMonth = "com.findwifi.hiddendevices.month"// 月 7.99
+        val skuYear = "com.findwifi.hiddendevices.3months"// 3个月 19.99
         private val LIST_OF_PRODUCTS = listOf(
+            skuWeek,
             skuMonth,
             skuYear,
         )
