@@ -50,6 +50,18 @@ class BottomNavigationActivity : AppCompatActivity() {
 //        navView.setupWithNavController(navController)// 对底部 展示不影响
         initFragment(savedInstanceState)
         navView.setOnNavigationItemSelectedListener(listener)
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R ||
+//            Environment.isExternalStorageManager()) {
+//            ToastUtils.showLong("已获得访问所有文件权限")
+//        } else {
+//            val builder = AlertDialog.Builder(this)
+//                .setMessage("本程序需要您同意允许访问所有文件权限")
+//                .setPositiveButton("确定") { _, _ ->
+//                    val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+//                    startActivity(intent)
+//                }
+//            builder.show()
+//        }
 
     }
 
