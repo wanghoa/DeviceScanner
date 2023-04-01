@@ -6,16 +6,15 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.devicewifitracker.android.BottomNavigationActivity
-import com.devicewifitracker.android.MainActivity
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivityWelcomeBinding
 import com.devicewifitracker.android.ui.guide.GuideActivity
 import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.util.Constant
 import com.devicewifitracker.android.util.PermissionUtil
 import com.devicewifitracker.android.util.SubscribeManager
@@ -26,7 +25,17 @@ class WelcomeActivity :BaseActivity<ActivityWelcomeBinding>() {
         super.initView(savedInstanceState)
 //        requestPermission()
         if(SPUtils.getInstance().getBoolean(Constant.GUIDE_KEY)){
+                    if (!SubscribeManager.instance.isSubscribe()) {
+//                        SubscribeActivity.actionOpenAct(this@WelcomeActivity,
+//                            Constant.GUIDE_USER_KEY
+//                        )
 
+                        SubscribeActivityNew.actionOpenAct(this@WelcomeActivity,Constant.GUIDE_USER_KEY)
+
+
+                        finish()
+                        return
+                    }
             startActivity(Intent(this@WelcomeActivity, BottomNavigationActivity::class.java))
         }else{
             startActivity(Intent(this@WelcomeActivity, GuideActivity::class.java))

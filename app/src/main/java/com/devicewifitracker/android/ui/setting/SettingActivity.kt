@@ -11,6 +11,7 @@ import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
 import com.devicewifitracker.android.databinding.ActivitySettingBinding
 import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.util.OpenGooglePlay
 import com.devicewifitracker.android.util.SubscribeManager
 
@@ -33,7 +34,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(){
 
         }
         binding.pay.setOnClickListener{
-            startActivity(Intent(this@SettingActivity, SubscribeActivity::class.java))
+//            startActivity(Intent(this@SettingActivity, SubscribeActivity::class.java))
+            startActivity(Intent(this@SettingActivity, SubscribeActivityNew::class.java))
         }
         //隐私
         binding.privacyPolicy.setOnClickListener {

@@ -23,6 +23,7 @@ import com.devicewifitracker.android.R
 import com.devicewifitracker.android.databinding.IpTableItemBinding
 import com.devicewifitracker.android.ui.detail.SuspiciousDetailActivity
 import com.devicewifitracker.android.ui.subscribe.SubscribeActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.util.Constant
 import com.devicewifitracker.android.util.SubscribeManager
 
@@ -47,12 +48,12 @@ class TableAdapter(private val tableList: List<String>) :
                 ) && SPUtils.getInstance().getBoolean(Constant.AGREEMENT_KEY)
             ) {
 
-//                if (!SubscribeManager.instance.isSubscribe()) {
-////                    startActivity(Intent(this@DeviceListActivity,SubscribeActivity::class.java))
+                if (!SubscribeManager.instance.isSubscribe()) {
+                    SubscribeActivityNew.actionOpenAct(parent.context,"")
 //                    SubscribeActivity.actionOpenAct(parent.context,"")
-//
-//
-//                } else {
+
+
+                } else {
                     val position = holder.bindingAdapterPosition
                 if (position!= -1){
                     val table = tableList[position]
@@ -60,7 +61,7 @@ class TableAdapter(private val tableList: List<String>) :
                     SuspiciousDetailActivity.actionOpenAct(parent.context, table, "confirmed")
                 }
 
-//                }
+                }
 
             } else {
 //                ToastUtils.showLong("数据检查中,请稍后...")
