@@ -96,7 +96,7 @@ class SubscribeActivityNew : BaseActivity<ActivitySubscribeNewBinding>() {
                 //如果是从引导页进入，跳转到首页
                 startActivity(Intent(this@SubscribeActivityNew, BottomNavigationActivity::class.java))
             }
-            finish()
+//            finish()
         }
     }
 }
