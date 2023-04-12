@@ -138,15 +138,6 @@ class HomeFragment : Fragment(), Handler.Callback {
                 //此处可以使用 valueAnimator 动画进行优化
                 when (progress1) {
 
-//                    in 20..50 -> {
-//                        mHandler?.postDelayed(this, 300)
-//                    }
-//                    in 50..80 -> {
-//                        mHandler?.postDelayed(this, 270)
-//                    }
-//                    in 80..100 -> {
-//                        mHandler?.postDelayed(this, 260)
-//                    }
                     in 100..150 -> {
                         mHandler?.postDelayed(this, 300)
                     }
