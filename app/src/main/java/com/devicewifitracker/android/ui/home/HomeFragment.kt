@@ -72,7 +72,7 @@ class HomeFragment : Fragment(), Handler.Callback {
     }
 
     fun initView() {
-        SPUtils.getInstance().put(AGREEMENT_KEY,false)
+        SPUtils.getInstance().put(AGREEMENT_KEY, false)
 
         // 设置
         binding?.mainSetting.setOnClickListener {
@@ -82,8 +82,8 @@ class HomeFragment : Fragment(), Handler.Callback {
         binding?.mainSearching.nextll.setOnClickListener {
             if (!SubscribeManager.instance.isSubscribe()) {
 //                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1,"") }
-               return@setOnClickListener
+                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1, "") }
+                return@setOnClickListener
             }
             SuspiciousDevicActivity.actionOpenAct(
                 context,
@@ -230,8 +230,10 @@ class HomeFragment : Fragment(), Handler.Callback {
         val wifiInfo = wifiManager.connectionInfo //获取当前连接的信息
         val dhcpInfo = wifiManager.dhcpInfo  //获取DHCP 的信息
 //        binding?.main.tvWifiName?.text = "当前连接Wi-Fi:" + " " + wifiInfo.ssid.replace("\"", "")
-        binding?.main.tvWifiName?.text = getString(R.string.wifi) + " " + WifiSSidUtil.getWifiSSID(App.context)
-        binding?.main.tvIpAdress?.text = getString(R.string.ip) + " " + "${NetworkUtils.getIpAddressByWifi()}"
+        binding?.main.tvWifiName?.text =
+            getString(R.string.wifi) + " " + WifiSSidUtil.getWifiSSID(App.context)
+        binding?.main.tvIpAdress?.text =
+            getString(R.string.ip) + " " + "${NetworkUtils.getIpAddressByWifi()}"
         binding?.main.describe?.text = getString(R.string.home_des)
         //  +"\nip:" +"${NetworkUtils.getIPAddress(true)}"与上方获取值相同
         mHandler?.postDelayed(object : Runnable {
@@ -240,8 +242,10 @@ class HomeFragment : Fragment(), Handler.Callback {
                 thread {
 //                    NetworkInfoUtil.sendDataToLoacl()
 //                    val arpList =   NetworkInfoUtil.readArp(binding.tvAppName)
-                    val arpList =   NetworkInfoUtil.readArp1()//TODO 获取到的数据数量与iOS一致
-                    LogUtils.d("可疑设备数量=="+ "${arpList.size}")
+                    var arpList = NetworkInfoUtil.readArp1()//TODO 获取到的数据数量与iOS一致
+                    if (arpList.isEmpty()) {
+                        arpList = NetworkInfoUtil.readArp(binding.tvAppName)
+                    }
                     val listIp = routerDao?.loadAllRouters()// 获取数据库中的所有数据
                     roomListIp = listIp
 //              activity?. runOnUiThread {
@@ -267,7 +271,7 @@ class HomeFragment : Fragment(), Handler.Callback {
                                 }
                             }
                             binding?.mainSearching.suspiciousDeviceTV.text =
-                              getString(R.string.found)  +" ${susList?.size} "+getString(R.string.suspicious_devices)
+                                getString(R.string.found) + " ${susList?.size} " + getString(R.string.suspicious_devices)
                             adapter?.notifyDataSetChanged()
                         }
                     }, 300)
@@ -276,7 +280,9 @@ class HomeFragment : Fragment(), Handler.Callback {
                     //  通过Wi-Fi名称 过滤是否是可信网络（）
                     arpList?.forEachIndexed { index, scanResult ->
                         //  前者自己IP 后者 路由IP
-                        if (!NetworkUtils.getIpAddressByWifi().equals(scanResult) && !NetworkUtils.getGatewayByWifi().equals(scanResult)
+                        if (!NetworkUtils.getIpAddressByWifi()
+                                .equals(scanResult) && !NetworkUtils.getGatewayByWifi()
+                                .equals(scanResult)
                         ) {
                             if (!susList!!.contains(scanResult)) {
                                 susList?.add(scanResult)
@@ -311,7 +317,7 @@ class HomeFragment : Fragment(), Handler.Callback {
                         }
                     }
                     binding?.mainSearching.suspiciousDeviceTV.text =
-                    getString(R.string.found)  +" ${susList?.size} "+getString(R.string.suspicious_devices)
+                        getString(R.string.found) + " ${susList?.size} " + getString(R.string.suspicious_devices)
 
                     binding?.mainSearching.nextll.visibility = View.VISIBLE
                     binding?.mainSearching.textDes.visibility = View.VISIBLE
@@ -325,8 +331,10 @@ class HomeFragment : Fragment(), Handler.Callback {
                     if (this.isAdded) {
                         progress1++
                         binding?.mainSearching.tvScanning.text =
-                            getString(R.string.scanning) + " " + "${progress1}" + " " + getString(R.string.from) + " " + "${254}" + " " + getString(R.string.ip_range)
-                        var percentage=  (progress1*100.0/254.0 ).toInt()
+                            getString(R.string.scanning) + " " + "${progress1}" + " " + getString(R.string.from) + " " + "${254}" + " " + getString(
+                                R.string.ip_range
+                            )
+                        var percentage = (progress1 * 100.0 / 254.0).toInt()
                         var progressText = "${percentage}%"
                         binding.mainSearching.progressTv.text = progressText
                     }

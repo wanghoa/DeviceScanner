@@ -232,7 +232,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
                 mHandler?.sendEmptyMessage(1)
             }
         }
-        mHandler = Handler(this)
+
         mHandler?.postDelayed(runnable as Runnable, 0)
 
     }
