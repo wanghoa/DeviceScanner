@@ -34,11 +34,11 @@
 
             <ImageView
                 android:id="@+id/gif_iv"
-                android:layout_width="166dp"
-                android:layout_height="166dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp40"
-                android:src="@drawable/gif_wifi" />
+                android:src="@mipmap/icon_a" />
 
             <TextView
                 android:id="@+id/tvScanning"
@@ -60,6 +60,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp52"
+                    android:drawableLeft="@mipmap/icon_flag"
+                    android:drawablePadding="@dimen/dp5"
                     android:text="@string/unlimited"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -68,6 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp52"
+                    android:drawableLeft="@mipmap/icon_flag"
+                    android:drawablePadding="@dimen/dp5"
                     android:text="@string/scan"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -76,6 +80,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp52"
+                    android:drawableLeft="@mipmap/icon_flag"
+                    android:drawablePadding="@dimen/dp5"
                     android:text="@string/deep"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
@@ -84,6 +90,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp52"
+                    android:drawableLeft="@mipmap/icon_flag"
+                    android:drawablePadding="@dimen/dp5"
                     android:text="@string/fully"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
