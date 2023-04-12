@@ -22,7 +22,7 @@ class SubscribeManager {
     }
 
     private lateinit var billingClientLifecycle: BillingClientLifecycle
-    val skuWeek= "com.findwifi.hiddendevices.week"// 周 2.99
+    val skuWeek = "com.findwifi.hiddendevices.week"// 周 2.99
     val skuMonth = "com.findwifi.hiddendevices.month"// 月 7.99
     val skuYear = "com.findwifi.hiddendevices.3months"// 3个月 19.99
     private val skuList = listOf(skuMonth, skuYear)
@@ -67,6 +67,13 @@ class SubscribeManager {
         var list = mutableListOf<QueryProductDetailsParams.Product>()
         list.add(
             QueryProductDetailsParams.Product.newBuilder()
+                .setProductId(skuWeek)
+                .setProductType(BillingClient.ProductType.SUBS)
+                .build()
+
+        )
+        list.add(
+            QueryProductDetailsParams.Product.newBuilder()
                 .setProductId(skuMonth)
                 .setProductType(BillingClient.ProductType.SUBS)
                 .build()
@@ -76,7 +83,10 @@ class SubscribeManager {
                 .setProductId(skuYear)
                 .setProductType(BillingClient.ProductType.SUBS)
                 .build()
+
         )
+
+
         val queryProductDetailsParams =
             QueryProductDetailsParams.newBuilder()
                 .setProductList(list)
@@ -84,7 +94,10 @@ class SubscribeManager {
 
         billingClient.queryProductDetailsAsync(queryProductDetailsParams) { billingResult,
                                                                             productDetailsList ->
-            LogUtils.file(TAG, "queryProductDetailsAsync==${billingResult.responseCode}==${billingResult.debugMessage}")
+            LogUtils.file(
+                TAG,
+                "queryProductDetailsAsync==${billingResult.responseCode}==${billingResult.debugMessage}"
+            )
             if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 if (productDetailsList != null && productDetailsList.size > 0) {
                     skuDetailList = productDetailsList
@@ -129,6 +142,10 @@ class SubscribeManager {
                                 if (!productsWithUserCanceled.contains(BillingClientLifecycle.skuYear)) {
                                     productsWithUserCanceled.contains(BillingClientLifecycle.skuYear)
                                 }
+                            } else {
+                                if (!productsWithUserCanceled.contains(BillingClientLifecycle.skuWeek)) {
+                                    productsWithUserCanceled.contains(BillingClientLifecycle.skuWeek)
+                                }
                             }
                         }
                     }
@@ -143,13 +160,15 @@ class SubscribeManager {
     }
 
 
-    fun restore(activity: Activity,listener: BillingLaunchCallback?) {
+    fun restore(activity: Activity, listener: BillingLaunchCallback?) {
         LogUtils.file(TAG, "restore==${productsWithUserCanceled}")
 //        ToastUtils.showLong("${productsWithUserCanceled}")
         if (productsWithUserCanceled.contains(skuYear)) {
             subscribe(activity, skuYear, listener)
         } else if (productsWithUserCanceled.contains(skuMonth)) {
             subscribe(activity, skuMonth, listener)
+        } else {
+            subscribe(activity, skuWeek, listener)
         }
     }
 
@@ -160,8 +179,12 @@ class SubscribeManager {
         billingClient.queryPurchasesAsync(
             params.build()
         ) { billingResult, purchasesList ->
-            LogUtils.file(TAG, "queryPurchases==${billingResult.responseCode}==${billingResult.debugMessage}")
-            processPurchases(purchasesList, true) }
+            LogUtils.file(
+                TAG,
+                "queryPurchases==${billingResult.responseCode}==${billingResult.debugMessage}"
+            )
+            processPurchases(purchasesList, true)
+        }
     }
 
 //    fun subscribe(activity: Activity, sku: String) : Int{
@@ -188,7 +211,7 @@ class SubscribeManager {
                 }
             }
             if (currentSku != null) {
-                val offerToken = currentSku.subscriptionOfferDetails?.get(0)?.offerToken?:""
+                val offerToken = currentSku.subscriptionOfferDetails?.get(0)?.offerToken ?: ""
                 val productDetailsParamsList = listOf(
                     BillingFlowParams.ProductDetailsParams.newBuilder()
                         .setProductDetails(currentSku)
@@ -259,10 +282,13 @@ class SubscribeManager {
                     if (!purchase.products.isNullOrEmpty()) {
                         if (purchase.products.contains(BillingClientLifecycle.skuMonth) || purchase.products.contains(
                                 BillingClientLifecycle.skuYear
+                            ) || purchase.products.contains(
+                                BillingClientLifecycle.skuWeek
                             )
                         ) {
                             productsWithUserCanceled.remove(skuMonth)
                             productsWithUserCanceled.remove(skuYear)
+                            productsWithUserCanceled.remove(skuWeek)
                             isSubscribed = true
                             if (!purchase.isAcknowledged) {
                                 val purchaseToken = purchase.purchaseToken
@@ -275,7 +301,10 @@ class SubscribeManager {
                                         .setPurchaseToken(purchaseToken)
                                         .build()
                                 ) { billingResult ->
-                                    LogUtils.file(TAG, "acknowledgePurchase==${billingResult.responseCode}==${billingResult.debugMessage}")
+                                    LogUtils.file(
+                                        TAG,
+                                        "acknowledgePurchase==${billingResult.responseCode}==${billingResult.debugMessage}"
+                                    )
                                     if (billingResult.responseCode
                                         == BillingClient.BillingResponseCode.OK
                                     ) {
