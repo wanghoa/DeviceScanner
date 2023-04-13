@@ -1,5 +1,15 @@
 package com.devicewifitracker.android.util;
 
+import static android.content.Context.CONNECTIVITY_SERVICE;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.DhcpInfo;
+import android.net.LinkAddress;
+import android.net.LinkProperties;
+import android.net.MacAddress;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
@@ -10,12 +20,14 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +86,7 @@ public class NetworkInfoUtil {
                     socket = new DatagramSocket();
                     int position = 2;
                     while (position < 255) {
-                        LogUtils.d("Scanner ", "run: udp-" + substring + position);
+//                        LogUtils.d("Scanner ", "run: udp-" + substring + position);
                         dp.setAddress(InetAddress.getByName(substring + String.valueOf(position)));
                         socket.send(dp);
                         position++;
@@ -142,6 +154,7 @@ public class NetworkInfoUtil {
      * 适配Android 10 以上机型 代替 readArp（） android 10 及以上禁止使用 绝对路径获取文件
      */
     private static final String IP_CMD = "ip neighbor";
+//    private static final String IP_CMD = "/system/bin/ping";
     public static List<String> readArp1() {
         String line = "";
         String ip = "";
@@ -156,25 +169,17 @@ public class NetworkInfoUtil {
             LogUtils.d("ipProc.exitValue()", "value=" + ipProc.exitValue());
         ;
             if (ipProc.exitValue() != 0) {//方法返回子进程的退出值。
+                // TODO  使用此方式获取 Runtime.getRuntime().exec(IP_CMD) Android 12 会执行到此出抛出异常
                     throw new Exception("Unable to access ARP entries");
                 }
             reader = new BufferedReader(new InputStreamReader(ipProc.getInputStream(), "UTF-8"));
 
             while ((line = reader.readLine()) != null) {
-//                String[] neighborLine = line.split("\\s+");
-//                // We don't have a validated ARP entry for this case.
-//                if (neighborLine.length <= 4) {
-//                    continue;
-//                }
-//                String ipaddr = neighborLine[0];
-//                InetAddress addr = InetAddress.getByName(ipaddr);
-//                if (addr.isLinkLocalAddress() || addr.isLoopbackAddress()) {
-//                    continue;
-//                }
-//                String macAddress = neighborLine[4];
+
                 line = line.trim();
-                LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length() + " ;line= " + line.length());
+                LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length() );
                 //line= 192.168.0.117 dev wlan0 lladdr 10:08:b1:e6:d4:e7 STALE
+                //line= 192.168.101.63 dev wlan0  FAILED ; line= 32
                 if (line.length() < 54) continue;
                 if (line.toUpperCase(Locale.US).contains("IP")) continue;
                 ip = line.substring(0, 14).trim();
@@ -266,13 +271,111 @@ public class NetworkInfoUtil {
 
 // 获取当前连接的 IP 地址列表
         List<LinkAddress> linkAddresses = linkProperties.getLinkAddresses();
+        List<InetAddress> inetAddressList =  linkProperties.getDnsServers();
 
 // 获取 ARP 缓存表中的对应关系
 
         Map<InetAddress, MacAddress> arpCache = ARPCache.get(linkAddresses);
         return linkAddresses;
 
-    }*/
+    }
 
+    public static void A(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager != null) {
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            String macAddress = wifiInfo.getMacAddress();
+            List<InetAddress> arpCache = Collections.list(ArpUtils.getArpCache(macAddress));
+            // Use the ARP cache entries as needed
+        }
+
+    }*/
+public static void pingLocalDevices(Context context) {
+    // 获取本地网络信息
+    String localIp = getLocalIpAddress();
+    String subnetMask = getSubnetMask(context);
+
+    if (localIp == null || subnetMask == null) {
+        return;
+    }
+
+    // 计算局域网 IP 段
+    String[] ipSegments = calculateIpSegments(localIp, subnetMask);
+
+    // 逐个 ping 每个 IP 地址
+    for (int i = 1; i < 255; i++) {
+        for (String ipSegment : ipSegments) {
+            String ipAddress = ipSegment + i;
+//            new PingTask().execute(ipAddress);
+
+            LogUtils.d("--------------------" +ipAddress+"\n"  +   "ipAddress + \"\\n\"");
+        }
+    }
+}
+
+
+
+    // 获取本地 IP 地址
+    public static String getLocalIpAddress() {
+        try {
+            Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
+            while (en.hasMoreElements()) {
+                NetworkInterface ni = en.nextElement();
+                Enumeration<InetAddress> addresses = ni.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    InetAddress addr = addresses.nextElement();
+                    if (!addr.isLinkLocalAddress() && !addr.isLoopbackAddress() && addr instanceof Inet4Address) {
+                        return addr.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 获取子网掩码
+    public static String getSubnetMask(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        DhcpInfo dhcpInfo = wifiManager.getDhcpInfo();
+        int subnetMask = dhcpInfo.netmask;
+        return intToIp(subnetMask);
+    }
+
+    // 计算局域网 IP 段
+    public static String[] calculateIpSegments(String localIp, String subnetMask) {
+        int[] ips = new int[4];
+        int[] masks = new int[4];
+
+        String[] localIpSegments = localIp.split("\\.");
+        for (int i = 0; i < localIpSegments.length; i++) {
+            ips[i] = Integer.parseInt(localIpSegments[i]);
+        }
+
+        String[] subnetMaskSegments = subnetMask.split("\\.");
+        for (int i = 0; i < subnetMaskSegments.length; i++) {
+            masks[i] = Integer.parseInt(subnetMaskSegments[i]);
+        }
+
+        int[] networkAddress = new int[4];
+        for (int i = 0; i < networkAddress.length; i++) {
+            networkAddress[i] = ips[i] & masks[i];
+        }
+
+        String[] ipSegments = new String[256];
+        for (int i = 0; i < 256; i++) {
+            int[] address = networkAddress.clone();
+            address[3] = address[3] + i;
+            ipSegments[i] = intToIp(address[0]) + "." + intToIp(address[1]) + "." + intToIp(address[2]) + "." + intToIp(address[3]);
+        }
+
+        return ipSegments;
+    }
+
+    // 将整数形式的 IP 转换为字符串形式
+    public static String intToIp(int i) {
+        return (i & 0xFF) + ".";
+    }
 
 }
