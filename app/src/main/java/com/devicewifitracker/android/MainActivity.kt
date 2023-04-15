@@ -66,14 +66,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
             binding.mainWifiDetect.setCompoundDrawables(null, drawable, null, null)
         }
         NetworkInfoUtil.sendDataToLoacl()
-        binding?.main.btnScan.setOnClickListener {
-            binding?.mainSearching.mainSearchingLl.visibility = View.VISIBLE
-            binding?.main.mainLl.visibility = View.GONE
+        binding?.main!!.btnScan.setOnClickListener {
+            binding?.mainSearching!!.mainSearchingLl.visibility = View.VISIBLE
+            binding?.main!!.mainLl.visibility = View.GONE
             binding.tvAppName.visibility = View.GONE
 
             binding.mainSearching.tvFinishDescribe.text = getString(R.string.main_searching_closed)
             val barHeight1 = BarUtils.getStatusBarHeight()//获取状态栏高度
-            binding?.mainSearching?.mainSearchingLl.setPadding(
+            binding?.mainSearching?.mainSearchingLl!!.setPadding(
                 0,
                 ConvertUtils.dp2px(40.toFloat()) - barHeight1,
                 0,
@@ -100,7 +100,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
 
 
         // 设置
-        binding?.mainSetting.setOnClickListener {
+        binding?.mainSetting!!.setOnClickListener {
             SettingActivity.actionOpenAct(this)
         }
         // 查看可疑设备列表
@@ -145,8 +145,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
             App.context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val wifiInfo = wifiManager.connectionInfo //获取当前连接的信息
         val dhcpInfo = wifiManager.dhcpInfo  //获取DHCP 的信息
-        binding?.main.tvWifiName.text = "当前连接Wi-Fi:" + " " + wifiInfo.ssid.replace("\"", "")
-        binding?.main.tvIpAdress?.text = "IP地址:" + " " + "${NetworkUtils.getIpAddressByWifi()}"
+        binding?.main!!.tvWifiName.text = "当前连接Wi-Fi:" + " " + wifiInfo.ssid.replace("\"", "")
+        binding?.main!!.tvIpAdress?.text = "IP地址:" + " " + "${NetworkUtils.getIpAddressByWifi()}"
         //  +"\nip:" +"${NetworkUtils.getIPAddress(true)}"与上方获取值相同
 //etworkUtils.getGatewayByWifi() 路由器ip
         mHandler?.postDelayed(object : Runnable {
