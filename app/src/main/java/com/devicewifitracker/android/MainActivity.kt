@@ -156,7 +156,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
                 runOnUiThread {
                     tableList?.clear()
 //                    list.add(0,NetworkUtils.getIpAddressByWifi())
-                    list.add(0,NetworkUtils.getGatewayByWifi())// 路由IP
+                    list.add(0, NetworkUtils.getGatewayByWifi())// 路由IP
                     if (!TextUtils.isEmpty(NetworkUtils.getIpAddressByWifi())) {
                         list.add(0, NetworkUtils.getIpAddressByWifi())// 手机IP
                     }
@@ -283,7 +283,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
                     // 判断Wi-Fi是否打开 ; 判断Wi-Fi是否是连接状态
                     if (NetworkUtils.getWifiEnabled() && NetworkUtils.isWifiConnected()) {
                         scanwifi()
-                        isShowDialog= false
+                        isShowDialog = false
                     }
                 }
             })
@@ -295,28 +295,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), Handler.Callback,
         } else {
             // 打开网络设置界面  TODO 弹出窗口提示 连接Wi-Fi或 打开Wi-Fi
             ToastUtils.showLong("连接WI-FI")
-            if(!isShowDialog){
-            val buidler = AlertDialog.Builder(this)
-            buidler.setTitle("")
-            buidler.setMessage("请连接无线网络")
-            buidler.setCancelable(true)
-            buidler.setPositiveButton("确认", object : DialogInterface.OnClickListener {
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    NetworkUtils.openWirelessSettings()
-                    dialogShowFlag = true
-                    isShowDialog= true
-                    p0?.dismiss()
-                }
+            if (!isShowDialog) {
+                val buidler = AlertDialog.Builder(this)
+                buidler.setTitle("")
+                buidler.setMessage("请连接无线网络")
+                buidler.setCancelable(true)
+                buidler.setPositiveButton("确认", object : DialogInterface.OnClickListener {
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                        NetworkUtils.openWirelessSettings()
+                        dialogShowFlag = true
+                        isShowDialog = true
+                        p0?.dismiss()
+                    }
 
-            })
-            buidler.setNegativeButton("关闭", object : DialogInterface.OnClickListener {
-                override fun onClick(p0: DialogInterface?, p1: Int) {
-                    p0?.dismiss()
-                }
-            })
-            buidler.create().show()
+                })
+                buidler.setNegativeButton("关闭", object : DialogInterface.OnClickListener {
+                    override fun onClick(p0: DialogInterface?, p1: Int) {
+                        p0?.dismiss()
+                    }
+                })
+                buidler.create().show()
 
-        }
+            }
         }
     }
 
