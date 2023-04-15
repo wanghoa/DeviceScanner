@@ -74,7 +74,8 @@ class BottomNavigationActivity : AppCompatActivity() {
                 home = HomeFragment();
             }
             currentFragment = home
-            fragmentTransaction?.replace(R.id.container, home!!)?.commit();//fragment parent layout id
+            fragmentTransaction?.replace(R.id.container, home!!)
+                ?.commit();//fragment parent layout id
         }
     }
 
@@ -96,15 +97,15 @@ class BottomNavigationActivity : AppCompatActivity() {
                     switchContent(currentFragment, notification);
                     return true;
                 }
-                R.id.navigation_dashboard ->{
-                    if(dashboard == null){
-                       dashboard = DashboardFragment()
+                R.id.navigation_dashboard -> {
+                    if (dashboard == null) {
+                        dashboard = DashboardFragment()
                     }
-                    switchContent(currentFragment,dashboard)
+                    switchContent(currentFragment, dashboard)
                     return true
                 }
-              else  ->
-                return false
+                else ->
+                    return false
             }
         }
     }
