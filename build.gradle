@@ -5,7 +5,7 @@
 //    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 //}
 buildscript {
-    ext.kotlin_version = "1.6.10"
+    ext.kotlin_version = "1.6.10"//1.7.20
     repositories {
 //        gradlePluginPortal()
         google()
