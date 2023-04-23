@@ -22,6 +22,7 @@ import com.devicewifitracker.android.databinding.FragmentHomeBinding
 import com.devicewifitracker.android.room.dao.RouterDao
 import com.devicewifitracker.android.room.entity.Router
 import com.devicewifitracker.android.ui.setting.SettingActivity
+import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.ui.suspicious.SuspiciousDevicActivity
 import com.devicewifitracker.android.ui.table.TableAdapter
 import com.devicewifitracker.android.util.*
@@ -79,11 +80,11 @@ class HomeFragment : Fragment(), Handler.Callback {
         }
         // 查看可疑设备列表
         binding?.mainSearching.nextll.setOnClickListener {
-//            if (!SubscribeManager.instance.isSubscribe()) {
-////                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-//                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1, "") }
-//                return@setOnClickListener
-//            }
+            if (!SubscribeManager.instance.isSubscribe()) {
+//                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
+                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1, "") }
+                return@setOnClickListener
+            }
             SuspiciousDevicActivity.actionOpenAct(
                 context,
                 susList as ArrayList<String>,
