@@ -8,11 +8,16 @@ import android.net.DhcpInfo;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.MacAddress;
+import android.net.RouteInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
 import android.widget.TextView;
+
 import com.blankj.utilcode.util.LogUtils;
+import com.devicewifitracker.android.subnet.Device;
+import com.devicewifitracker.android.util.networktools.SubnetDevices;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,6 +40,25 @@ import java.util.Locale;
 import java.util.Map;
 
 public class NetworkInfoUtil {
+
+    public static List<String> pingIp() {
+        List<String> ipList = new ArrayList<>();
+        SubnetDevices.fromLocalAddress().findDevices(new SubnetDevices.OnSubnetDeviceFound() {
+            @Override
+            public void onDeviceFound(Device device) {
+                ipList.add(device.ip);
+            }
+
+            @Override
+            public void onFinished(ArrayList<Device> devicesFound) {
+
+            }
+        });
+        return ipList;
+    }
+
+    ;
+
     private static String getHostIP() {
         String hostIp = null;
         try {
@@ -70,7 +94,7 @@ public class NetworkInfoUtil {
 
         //获取本机所在的局域网地址
         String hostIP = getHostIP();
-        if (TextUtils.isEmpty(hostIP)){
+        if (TextUtils.isEmpty(hostIP)) {
             return;
         }
         int lastIndexOf = hostIP.lastIndexOf(".");
@@ -105,12 +129,13 @@ public class NetworkInfoUtil {
 
     /**
      * 1：通过java运行cmd命令，来通过arp命令获取同一网络下设备信息，对于支持linux 和windows的设备有效，像一些非智能设备，就无力回天了
-     *
+     * <p>
      * 2：使用android手机通过向子网内所有设备先发送一遍udp包，实现与在线的设备都进行通信一遍，
      * 这样对应的路由信息就自动存储在本地手机中，然后在通过读取android 本机的arp缓存表，来获取设备信息
      * ————————————————
      * 版权声明：本文为CSDN博主「予渝与裕舆」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
      * 原文链接：https://blog.csdn.net/u012842328/article/details/107384978 android获取局域网设备的ip和对应的mac地址
+     *
      * @param tv_main_result
      * @return
      */
@@ -154,7 +179,8 @@ public class NetworkInfoUtil {
      * 适配Android 10 以上机型 代替 readArp（） android 10 及以上禁止使用 绝对路径获取文件
      */
     private static final String IP_CMD = "ip neighbor";
-//    private static final String IP_CMD = "/system/bin/ping";
+
+    //    private static final String IP_CMD = "/system/bin/ping";
     public static List<String> readArp1() {
         String line = "";
         String ip = "";
@@ -164,20 +190,21 @@ public class NetworkInfoUtil {
         BufferedReader reader = null;
         try {
             Process ipProc = null;
-                ipProc = Runtime.getRuntime().exec(IP_CMD);
-                ipProc.waitFor();
+            ipProc = Runtime.getRuntime().exec(IP_CMD);
+            ipProc.waitFor();
             LogUtils.d("ipProc.exitValue()", "value=" + ipProc.exitValue());
-        ;
-            if (ipProc.exitValue() != 0) {//方法返回子进程的退出值。
-                // TODO  使用此方式获取 Runtime.getRuntime().exec(IP_CMD) Android 12 会执行到此出抛出异常
-                    throw new Exception("Unable to access ARP entries");
-                }
+            ;
+            if (ipProc.exitValue() != 0) {//方法返回子进程的退出值。Process.exitValue()方法只能在进程结束后调用
+                //如果进程正常结束，该值为进程的退出状态码，通常为0表示成功，非0表示出错；
+                //  使用此方式获取 Runtime.getRuntime().exec(IP_CMD) Android 12 会执行到此出抛出异常
+                throw new Exception("Unable to access ARP entries");
+            }
             reader = new BufferedReader(new InputStreamReader(ipProc.getInputStream(), "UTF-8"));
 
             while ((line = reader.readLine()) != null) {
 
                 line = line.trim();
-                LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length() );
+                LogUtils.d("scanner", "readArp: line= " + line + " ; line= " + line.length());
                 //line= 192.168.0.117 dev wlan0 lladdr 10:08:b1:e6:d4:e7 STALE
                 //line= 192.168.101.63 dev wlan0  FAILED ; line= 32
                 if (line.length() < 54) continue;
@@ -199,14 +226,15 @@ public class NetworkInfoUtil {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }  catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    public  static ArrayList<String> getConnectIp() throws Exception {
+
+    public static ArrayList<String> getConnectIp() throws Exception {
         ArrayList<String> connectIpList = new ArrayList<String>();
         Runtime runtime = Runtime.getRuntime();
         Process proc = runtime.exec("ip neigh show");
@@ -262,57 +290,57 @@ public class NetworkInfoUtil {
     }
 
 
-
-/*    public static List<LinkAddress> getAndrid12(Context context) {
+    public static List<LinkAddress> getAndrid12(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
 
-        LinkProperties linkProperties = connectivityManager.getLinkProperties(  connectivityManager.getActiveNetwork());
+        LinkProperties linkProperties = connectivityManager.getLinkProperties(connectivityManager.getActiveNetwork());
 //        LinkProperties linkProperties = connectivityManager.getActiveNetwork().getLinkProperties();
 
 // 获取当前连接的 IP 地址列表
         List<LinkAddress> linkAddresses = linkProperties.getLinkAddresses();
-        List<InetAddress> inetAddressList =  linkProperties.getDnsServers();
+        List<InetAddress> inetAddressList = linkProperties.getDnsServers();
+        List<RouteInfo> route = linkProperties.getRoutes();
+        for (int i = 0; i < linkAddresses.size(); i++) {
+            LogUtils.d("LinkAddress", "$" + linkAddresses.get(i));
+        }
+        for (int i = 0; i < inetAddressList.size(); i++) {
+            LogUtils.d("inetAddressList", "$" + inetAddressList.get(i));
+        }
+        for (int i = 0; i < route.size(); i++) {
+            LogUtils.d("route", "$" + route.get(i));
 
+        }
 // 获取 ARP 缓存表中的对应关系
 
-        Map<InetAddress, MacAddress> arpCache = ARPCache.get(linkAddresses);
+//        Map<InetAddress, MacAddress> arpCache = ARPCache.get(linkAddresses);
+
         return linkAddresses;
 
     }
 
-    public static void A(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        if (wifiManager != null) {
-            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            String macAddress = wifiInfo.getMacAddress();
-            List<InetAddress> arpCache = Collections.list(ArpUtils.getArpCache(macAddress));
-            // Use the ARP cache entries as needed
+
+    public static void pingLocalDevices(Context context) {
+        // 获取本地网络信息
+        String localIp = getLocalIpAddress();
+        String subnetMask = getSubnetMask(context);
+
+        if (localIp == null || subnetMask == null) {
+            return;
         }
 
-    }*/
-public static void pingLocalDevices(Context context) {
-    // 获取本地网络信息
-    String localIp = getLocalIpAddress();
-    String subnetMask = getSubnetMask(context);
+        // 计算局域网 IP 段
+        String[] ipSegments = calculateIpSegments(localIp, subnetMask);
 
-    if (localIp == null || subnetMask == null) {
-        return;
-    }
-
-    // 计算局域网 IP 段
-    String[] ipSegments = calculateIpSegments(localIp, subnetMask);
-
-    // 逐个 ping 每个 IP 地址
-    for (int i = 1; i < 255; i++) {
-        for (String ipSegment : ipSegments) {
-            String ipAddress = ipSegment + i;
+        // 逐个 ping 每个 IP 地址
+        for (int i = 1; i < 255; i++) {
+            for (String ipSegment : ipSegments) {
+                String ipAddress = ipSegment + i;
 //            new PingTask().execute(ipAddress);
 
-            LogUtils.d("--------------------" +ipAddress+"\n"  +   "ipAddress + \"\\n\"");
+                LogUtils.d("--------------------" + ipAddress + "\n" + "ipAddress + \"\\n\"");
+            }
         }
     }
-}
-
 
 
     // 获取本地 IP 地址

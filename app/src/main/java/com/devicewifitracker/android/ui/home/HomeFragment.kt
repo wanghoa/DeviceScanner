@@ -22,7 +22,6 @@ import com.devicewifitracker.android.databinding.FragmentHomeBinding
 import com.devicewifitracker.android.room.dao.RouterDao
 import com.devicewifitracker.android.room.entity.Router
 import com.devicewifitracker.android.ui.setting.SettingActivity
-import com.devicewifitracker.android.ui.subscribe.SubscribeActivityNew
 import com.devicewifitracker.android.ui.suspicious.SuspiciousDevicActivity
 import com.devicewifitracker.android.ui.table.TableAdapter
 import com.devicewifitracker.android.util.*
@@ -46,7 +45,7 @@ class HomeFragment : Fragment(), Handler.Callback {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private var arpList: List<String>? = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,7 +66,7 @@ class HomeFragment : Fragment(), Handler.Callback {
 //            textView.text = it
 //        }
         initView()
-
+        arpList =  NetworkInfoUtil.pingIp()// 通过ping获取局域网ip
         return root
     }
 
@@ -80,11 +79,11 @@ class HomeFragment : Fragment(), Handler.Callback {
         }
         // 查看可疑设备列表
         binding?.mainSearching.nextll.setOnClickListener {
-            if (!SubscribeManager.instance.isSubscribe()) {
-//                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
-                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1, "") }
-                return@setOnClickListener
-            }
+//            if (!SubscribeManager.instance.isSubscribe()) {
+////                context?.let { it1 -> SubscribeActivity.actionOpenAct(it1,"") }
+//                context?.let { it1 -> SubscribeActivityNew.actionOpenAct(it1, "") }
+//                return@setOnClickListener
+//            }
             SuspiciousDevicActivity.actionOpenAct(
                 context,
                 susList as ArrayList<String>,
@@ -157,7 +156,6 @@ class HomeFragment : Fragment(), Handler.Callback {
                 mHandler?.sendEmptyMessage(1)
             }
         }
-//        mHandler = Handler(this)
         mHandler?.postDelayed(runnable as Runnable, 0)
 
     }
@@ -218,8 +216,7 @@ class HomeFragment : Fragment(), Handler.Callback {
     fun scanwifi() {
         //获取 WIFI名称
         val wifiManager = App.context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val wifiInfo = wifiManager.connectionInfo //获取当前连接的信息
-        val dhcpInfo = wifiManager.dhcpInfo  //获取DHCP 的信息
+
 //        binding?.main.tvWifiName?.text = "当前连接Wi-Fi:" + " " + wifiInfo.ssid.replace("\"", "")
         binding?.main.tvWifiName?.text =
             getString(R.string.wifi) + " " + WifiSSidUtil.getWifiSSID(App.context)
@@ -231,12 +228,10 @@ class HomeFragment : Fragment(), Handler.Callback {
             override fun run() {
                 // TODO 这里是主线程
                 thread {
-//                    NetworkInfoUtil.sendDataToLoacl()
-//                    val arpList =   NetworkInfoUtil.readArp(binding.tvAppName)
-                    var arpList = NetworkInfoUtil.readArp1()//TODO 获取到的数据数量与iOS一致
-                    if (arpList.isEmpty()) {
-                        arpList = NetworkInfoUtil.readArp(binding.tvAppName)
-                    }
+                    //  var arpList = NetworkInfoUtil.readArp1()// 获取到的数据数量与iOS一致
+
+                    LogUtils.d("Scanner ", "run: pingIp===" + arpList?.size)
+
                     val listIp = routerDao?.loadAllRouters()// 获取数据库中的所有数据
                     roomListIp = listIp
 //              activity?. runOnUiThread {
@@ -281,6 +276,7 @@ class HomeFragment : Fragment(), Handler.Callback {
 
                         }
                     }
+                    //  NetworkScanner.scan()// 耗时任务 在子线程执行
                 }
             }
         }, 300)
