@@ -1,4 +1,3 @@
-
 package com.devicewifitracker.android.ui.guide
 
 import android.content.Intent
@@ -6,9 +5,11 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.devicewifitrack.android.ui.guide.GuideCallback
+import com.devicewifitracker.android.App
 import com.devicewifitracker.android.BottomNavigationActivity
 import com.devicewifitracker.android.R
 import com.devicewifitracker.android.base.BaseActivity
@@ -22,6 +23,8 @@ import com.devicewifitracker.finder.ui.guide.GuidePageAdapter
 import com.devicewifitracker.finder.ui.guide.GuideSecondFragment
 import com.devicewifitracker.finder.ui.guide.GuideThirdFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.model.ReviewErrorCode
 import com.stx.xhb.xbanner.XBanner
 import com.stx.xhb.xbanner.entity.SimpleBannerInfo
 import java.io.Serializable
@@ -33,17 +36,17 @@ import java.io.Serializable
  */
 
 class GuideActivity : BaseActivity<ActivityGuideBinding>() {
-    private lateinit var adapter : GuidePageAdapter
+    private lateinit var adapter: GuidePageAdapter
     override fun getLayoutId() = R.layout.activity_guide
     private val banner: XBanner? = null
     //java  int[] pics =  java 写法
 
-       private val pics = intArrayOf(
-       R.drawable.guide_one_old,
-       R.drawable.guide_two_old,
-       R.drawable.guide_three_old,
+    private val pics = intArrayOf(
+        R.drawable.guide_one_old,
+        R.drawable.guide_two_old,
+        R.drawable.guide_three_old,
 
-   )
+        )
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -52,7 +55,7 @@ class GuideActivity : BaseActivity<ActivityGuideBinding>() {
         fragments.add(GuideFirstFragment(guideCallback))
         fragments.add(GuideSecondFragment(guideCallback))
         fragments.add(GuideThirdFragment(guideCallback))
-        adapter = GuidePageAdapter(this,fragments)
+        adapter = GuidePageAdapter(this, fragments)
         binding.viewPager.adapter = adapter
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -67,60 +70,97 @@ class GuideActivity : BaseActivity<ActivityGuideBinding>() {
     }
 
     private fun initBanner() {
-      /*  val size: Int = pics.size
-        binding.banner.loadImage { banner, model, view, position ->
-            val bean = model as PicBean
-            val img = view as ImageView
-            img.scaleType = ImageView.ScaleType.CENTER_CROP
-            Glide.with(this@GuideActivity)
-                .load(bean.picPath)
-                .centerCrop()
-                .dontAnimate()
-                .error(bean.picPath)
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(img)
-        }
-        binding.banner.setOnItemClickListener { banner, model, view, position ->
-            if (position == size - 1) {
-                startActivity(Intent(this@GuideActivity, BottomNavigationActivity::class.java))
-                finish()
-            }
-        }
-        val list: MutableList<PicBean> = java.util.ArrayList<PicBean>()
-        //  for (int i=0;i<size;i++){
-        for (i in 0 until size) {
-            list.add(PicBean(pics.get(i)))
-        }
-        binding.banner.setBannerData(list)*/
+        /*  val size: Int = pics.size
+          binding.banner.loadImage { banner, model, view, position ->
+              val bean = model as PicBean
+              val img = view as ImageView
+              img.scaleType = ImageView.ScaleType.CENTER_CROP
+              Glide.with(this@GuideActivity)
+                  .load(bean.picPath)
+                  .centerCrop()
+                  .dontAnimate()
+                  .error(bean.picPath)
+                  .diskCacheStrategy(DiskCacheStrategy.ALL).into(img)
+          }
+          binding.banner.setOnItemClickListener { banner, model, view, position ->
+              if (position == size - 1) {
+                  startActivity(Intent(this@GuideActivity, BottomNavigationActivity::class.java))
+                  finish()
+              }
+          }
+          val list: MutableList<PicBean> = java.util.ArrayList<PicBean>()
+          //  for (int i=0;i<size;i++){
+          for (i in 0 until size) {
+              list.add(PicBean(pics.get(i)))
+          }
+          binding.banner.setBannerData(list)*/
     }
 
-    private var guideCallback =  object : GuideCallback {
+    private var guideCallback = object : GuideCallback {
         override fun callback(index: Int) {
             var currentIndex = binding.viewPager.currentItem
-            if(index == 2){
-                if (!SubscribeManager.instance.isSubscribe()) {
+
+            when (index) {
+                2 -> {
+                    if (!SubscribeManager.instance.isSubscribe()) {
 //                    SubscribeActivity.actionOpenAct(this@GuideActivity,GUIDE_USER_KEY)
-                    SubscribeActivityNew.actionOpenAct(this@GuideActivity,GUIDE_USER_KEY)
-                } else {
-                    startActivity(Intent(this@GuideActivity, BottomNavigationActivity::class.java))
+                        SubscribeActivityNew.actionOpenAct(this@GuideActivity, GUIDE_USER_KEY)
+                    } else {
+                        startActivity(
+                            Intent(
+                                this@GuideActivity,
+                                BottomNavigationActivity::class.java
+                            )
+                        )
+                    }
+                    finish()
+
                 }
-                finish()
-            }else{
-                binding.viewPager.setCurrentItem(index+1,true)
+                5 -> {
+                        val manager = ReviewManagerFactory.create(this@GuideActivity)
+                        val request = manager.requestReviewFlow()
+                        request.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // We got the ReviewInfo object
+                                val reviewInfo = task.result
+                                val flow = manager.launchReviewFlow(this@GuideActivity, reviewInfo)
+                                flow.addOnCompleteListener { _ ->
+                                    // The flow has finished. The API does not indicate whether the user
+                                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                                    // matter the result, we continue our app flow.
+
+//                                    ToastUtils.showLong("success")
+                                }
+                            } else {
+                                // There was some problem, log or handle the error code.
+//                            @ReviewErrorCode val reviewErrorCode = (task.getException() as TaskException).errorCode
+//                                ToastUtils.showLong("faile")
+
+                            }
+                        }
+                }
+                else -> {
+                    binding.viewPager.setCurrentItem(index + 1, true)
+                }
             }
         }
 
     }
-  class PicBean(id: Int) : SimpleBannerInfo(), Serializable {
-      var picPath: Int
-      @JvmName("getPicPath1")
-      fun getPicPath(): Int {
-          return picPath
-      }
-      override fun getXBannerUrl(): Any? {
-          return null
-      }
-      init {
-          picPath = id
-      }
-  }
+
+    class PicBean(id: Int) : SimpleBannerInfo(), Serializable {
+        var picPath: Int
+
+        @JvmName("getPicPath1")
+        fun getPicPath(): Int {
+            return picPath
+        }
+
+        override fun getXBannerUrl(): Any? {
+            return null
+        }
+
+        init {
+            picPath = id
+        }
+    }
 }

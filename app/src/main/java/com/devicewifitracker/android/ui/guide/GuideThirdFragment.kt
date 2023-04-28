@@ -18,6 +18,9 @@ class GuideThirdFragment(private val callback : GuideCallback) : BaseFragment<Fr
         binding.next.setOnClickListener {
             callback.callback(2)
         }
+        binding.guideThreeIv.setOnClickListener{
+            callback.callback(5)
+        }
     }
 
 }

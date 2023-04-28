@@ -100,4 +100,11 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.3"
 
     implementation 'com.github.xiaohaibin:XBanner:1.6.5'
+    //集成应用内评价
+    // This dependency is downloaded from the Google’s Maven repository.
+    // So, make sure you also include that repository in your project's build.gradle file.
+    implementation 'com.google.android.play:review:2.0.1'
+    //集成应用内评价
+    // For Kotlin users also add the Kotlin extensions library for Play In-App Review:
+    implementation 'com.google.android.play:review-ktx:2.0.1'
 }
