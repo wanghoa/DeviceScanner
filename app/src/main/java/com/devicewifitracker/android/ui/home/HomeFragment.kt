@@ -66,8 +66,9 @@ class HomeFragment : Fragment(), Handler.Callback {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        initView()
+
         arpList =  NetworkInfoUtil.pingIp()// 通过ping获取局域网ip
+        initView()
         return root
     }
 
@@ -280,7 +281,7 @@ class HomeFragment : Fragment(), Handler.Callback {
                     //  NetworkScanner.scan()// 耗时任务 在子线程执行
                 }
             }
-        }, 300)
+        }, 3000)
     }
 
     override fun onDestroyView() {
